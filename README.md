@@ -32,9 +32,12 @@ Projekt nasleduje filozofiu Django, kde každá appka slúži jednému účelu.
 
 - `templates`: Obsahuje HTML súbory.
 - `static`: Obsahuje CSS a JS súbory.
+- `staticfiles`: Slúži pre spracovanie statických súborov nginxom.
 - `models.py`: Definuje databázu.
 - `urls.py`: Routing.
 - `views`: Pohlady.
+- `mestoSlovakoSoft`: Manažér apiek a centrálne miesto pre správu všetkých modulov/aplikácií.
+
 
 ## Dostupnosť:
 
