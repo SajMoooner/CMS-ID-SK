@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="sk" class="govuk-template app-no-canvas-background">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Prihlásenie adminstrácia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {% load static %}
+
+    <link rel="stylesheet" href="{% static 'MainPage/idsk-frontend-2.11.0.min.css'%}">
+    <link rel="stylesheet" href="{% static 'LoginPage/style.css'%}">
+    <script src="{% static 'MainPage/idsk-frontend.min.js'%}"></script>
+
+</head>
+
+<body class="govuk-template__body ">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+    <header class="idsk-header-web " data-module="idsk-header-web">
+        <div class="idsk-header-web__scrolling-wrapper">
+            <!-- Warning Banner Starts Here -->
+            <div class="idsk-header-web__banner idsk-header-web__banner--warning">
+                <div class="govuk-width-container">
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-full">
+                            <div class="govuk-body-s idsk-header-web__banner-title">
+                                <div class="idsk-header-web__warning-icon"></div>
+                                Upozornenie: Vstupujete do chránenej zóny. Táto prihlasovacia stránka je riadená zákonom
+                                SR č. 42/2023 Z. z. o digitálnej identite a elektronickej autentifikácii. Nepovolený
+                                prístup je trestným činom podľa ustanovení trestného zákona.
+                            </div>
+                            <button class="idsk-header-web__banner-close" aria-label="Zavrieť banner"><span
+                                    class="idsk-header-web__menu-close"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Warning Banner Ends Here -->
+
+            <div class="idsk-header-web__tricolor"></div>
+
+            <div class="idsk-header-web__brand ">
+                <div class="govuk-width-container">
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-full">
+                            <div class="idsk-header-web__brand-gestor">
+                                <span class="govuk-body-s idsk-header-web__brand-gestor-text">
+                                    Testovacia stránka verejnej správy
+                                </span>
+                                <span class="govuk-body-s idsk-header-web__brand-gestor-text--mobile">
+                                    SK
+                                </span>
+
+                            </div>
+                        </div>
+                        <div class="idsk-header-web__brand-spacer"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="idsk-header-web__main">
+            <div class="govuk-width-container">
+                <div class="govuk-grid-row">
+                    <div class="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
+                        <div class="idsk-header-web__main-headline">
+                            <a href="/" title="Odkaz na úvodnú stránku">
+                                <img src="{% static 'MainPage/assets/images/header-web/logo-placeholder.png'%}"
+                                    alt="ID-SK Frontend" class="idsk-header-web__main-headline-logo">
+                                <span class="govuk-heading-m">
+                                    Portál pre administráciu
+                                </span>
+                            </a>
+
+                        </div>
+                    </div>
+
+                    <div class="govuk-grid-column-two-thirds">
+                        <div class="idsk-header-web__main-action">
+
+                            <div class="idsk-header-web__main--buttons">
+                            </div>
+
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="idsk-header-web__nav idsk-header-web__nav--mobile ">
+            <div class="govuk-width-container">
+                <div class="govuk-grid-row">
+                    <div class="govuk-grid-column-full">
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </header>
+
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing">
+        <div class="govuk-width-container">
+            <h1 class="govuk-heading-xl" id="nadpis">
+                Prihlásenie do adminstrácie
+            </h1>
+
+        </div>
+
+        <div class="govuk-width-container">
+
+            <div class="app-whitespace-highlight">
+                <div data-module="idsk-registration-for-event" class="idsk-registration-for-event">
+                    <form class="idsk-registration-for-event__form">
+                        <fieldset class="govuk-fieldset">
+                            <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
+                                <h3 class="govuk-fieldset__heading idsk-customer-surveys--subtitle">Prihlásenie</h3>
+                            </legend>
+
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="email">Meno</label>
+                                <span class="govuk-hint">Sem zadajte prihlasovacie meno</span>
+                                <span class="govuk-error-message">
+                                    <span class="govuk-visually-hidden">Chyba:</span>Zadajte správnu emailovú
+                                    adresu.
+                                </span>
+                                <input type="email" class="govuk-input" id="email" name="email" required>
+                            </div>
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="password">Heslo</label>
+                                <span class="govuk-hint"></span>
+                                <input type="text" class="govuk-input" id="password" name="password">
+                            </div>
+                            <div class="govuk-form-group">
+                                <label class="govuk-label" for="organization">KOD Mesta</label>
+                                <span class="govuk-hint"></span>
+                                <input type="text" class="govuk-input" id="organization" name="organization">
+                            </div>
+
+                            <div class="govuk-form-group">
+                                <span class="govuk-error-message">
+                                    <span class="govuk-visually-hidden">Chyba:</span>Prosím, akceptujte súhlas so
+                                    spracovaním osobných údajov.
+                                </span>
+                                <div class="govuk-checkboxes">
+                                    <div class="govuk-checkboxes__item">
+                                        <input type="checkbox" class="govuk-checkboxes__input" id="terms" name="terms"
+                                            required>
+                                        <label class="govuk-label  govuk-checkboxes__label" for="terms">Obaznámil
+                                            som sa zo zákonom SR č. 42/2023 Z. z. o digitálnej identite a
+                                            elektronickej autentifikácii</label>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="govuk-form-group">
+                                <button type="submit" class="govuk-button">Prihlásenie</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </main>
+
+
+    <div data-module="idsk-footer-extended">
+        <footer class="idsk-footer-extended  ">
+            <div class="idsk-footer-extended-main-content">
+                <div class="govuk-width-container">
+                    <div class="govuk-grid-column-full">
+                        <div class="idsk-footer-extended-description-panel">
+                            <div class="idsk-footer-extended-meta-item">
+                                <ul class="idsk-footer-extended-inline-list ">
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Pomoc" href="#">
+                                            Pomoc
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Cookies" href="#">
+                                            Cookies
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Kontakty" href="#">
+                                            Kontakty
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Mapa Stránky" href="#">
+                                            Mapa Stránky
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="RSS" href="#">
+                                            RSS
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Vyhlásenie o prístupnosti" href="#">
+                                            Vyhlásenie o prístupnosti
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="govuk-grid-column-two-thirds idsk-footer-extended-info-links">
+                                <p class="idsk-footer-extended-frame">Vytvorené v súlade s
+                                    <a class="govuk-link" title="Jednotným dizajn manuálom elektronických služieb."
+                                        href="#">
+                                        Jednotným dizajn manuálom elektronických služieb.
+                                    </a>
+                                </p>
+
+                            </div>
+                            <div class="govuk-grid-column-one-third idsk-footer-extended-logo-box">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script>window.GOVUKFrontend.initAll()</script>
+
+</body>
+
+</html>

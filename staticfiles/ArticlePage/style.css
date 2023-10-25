@@ -1,0 +1,76 @@
+h2{
+    color:#003078 !important;
+  }
+  
+#idsk-article-pattern .govuk-body-s {
+    font-size: 16px;
+    line-height: 20px;
+}
+
+.govuk-heading-l.idsk-stepper-pattern__intro-heading {
+    margin-bottom: 20px;
+    padding-top: 0;
+    margin-top: -10px;
+}
+
+.idsk-article-pattern__text-silver--down {
+    padding-top: 10px;
+    padding-bottom: 13px;
+}
+
+.idsk-article-pattern__text-silver--up {
+    border-top: 1px solid #BFC1C3;
+    padding-top: 10px;
+}
+
+@media(min-width: 48.0525em) {
+    .idsk-article-pattern__text-silver--down {
+        border-bottom: 1px solid #BFC1C3;
+    }
+}
+
+#idsk-article__content__news {
+    display: none;
+    margin-left: -15px;
+    padding-top: 10px
+}
+
+#idsk-article__content__news.idsk-article__content__news--visible {
+    display: block;
+}
+
+.idsk-article__social-networks {
+    margin-left: -15px;
+    padding-bottom: 10px;
+    padding-top: 20px;
+}
+
+#idsk-article__content__news .govuk-body-s {
+    margin-bottom: 8px;
+}
+
+.idsk-article__social-networks a {
+    text-decoration: none;
+}
+
+.idsk-article-pattern__subtitle {
+    color: #626A6E;
+    padding-bottom: 5px;
+}
+
+@media(min-width: 48.0525em) {
+    .idsk-article-pattern__element-right {
+        float: right;
+        margin-right: 15px;
+    }
+}
+
+@media (max-width: 767px) {
+    .idsk-header-web__main-action-search {
+        display: none;
+    }
+}
+img {
+    max-width: 100%;
+    height: auto;
+}

@@ -1,0 +1,858 @@
+<!DOCTYPE html>
+<html lang="sk" class="govuk-template app-no-canvas-background">
+
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#0b0c0c" />
+
+  <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+
+  {% load static %}
+  <title>Ukážka pre mesto XYZ</title>
+  <link rel="stylesheet" href="{% static 'MainPage/idsk-frontend-2.11.0.min.css'%}">
+  <link rel="stylesheet" href="{% static 'MainPage/style.css'%}">
+  <script src="{% static 'MainPage/idsk-frontend.min.js'%}"></script>
+
+</head>
+
+<body class="govuk-template__body ">
+
+  <header class="idsk-header-web " data-module="idsk-header-web">
+    <div class="idsk-header-web__scrolling-wrapper">
+      <!-- Warning Banner Starts Here -->
+      <div class="idsk-header-web__banner idsk-header-web__banner--warning">
+        <div class="govuk-width-container">
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+              <div class="govuk-body-s idsk-header-web__banner-title">
+                <div class="idsk-header-web__warning-icon"></div>
+                Upozornenie: Toto je testovacia verzia a slúži výhradne na demonštračné účely. Všetky údaje a interakcie
+                na tejto stránke sú fiktívne a riadia sa podľa zákona č. 18/2018 Z. z. o ochrane osobných údajov.
+              </div>
+              <button class="idsk-header-web__banner-close" aria-label="Zavrieť banner"><span
+                  class="idsk-header-web__menu-close"></span></button>
+            </div>
+          </div>
+        </div>
+      </div>
+      <!-- Warning Banner Ends Here -->
+      <div class="idsk-header-web__tricolor"></div>
+      <div class="idsk-header-web__brand ">
+        <div class="govuk-width-container">
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+              <div class="idsk-header-web__brand-gestor">
+                <span class="govuk-body-s idsk-header-web__brand-gestor-text">
+                  Testovacia stránka verejnej správy
+                </span>
+              </div>
+              <div class="idsk-header-web__brand-spacer"></div>
+              <div class="idsk-header-web__brand-language">
+                <button class="idsk-header-web__brand-language-button" aria-label="Rozbaliť jazykové menu"
+                  aria-expanded="false" data-text-for-hide="Skryť jazykové menu"
+                  data-text-for-show="Rozbaliť jazykové menu">
+                  Slovenčina
+                  <span class="idsk-header-web__link-arrow"></span>
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="idsk-header-web__main">
+        <div class="govuk-width-container">
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
+              <div class="idsk-header-web__main-headline">
+                <a href="/" title="Odkaz na úvodnú stránku">
+                  <img src="{% static 'MainPage/assets/images/header-web/logo-placeholder.png'%}" alt="ID-SK Frontend"
+                    class="idsk-header-web__main-headline-logo">
+                  <span class="govuk-heading-m">
+                    Webový portál pre verejnú správu
+                  </span>
+                </a>
+
+                <button class="idsk-button idsk-header-web__main-headline-menu-button" aria-label="Rozbaliť menu"
+                  aria-expanded="false" data-text-for-show="Rozbaliť menu" data-text-for-hide="Zavrieť menu">
+                  Menu
+                  <span class="idsk-header-web__menu-open"></span>
+                  <span class="idsk-header-web__menu-close"></span>
+                </button>
+              </div>
+            </div>
+
+            <div class="govuk-grid-column-two-thirds">
+              <div class="idsk-header-web__main-action">
+                <form class="idsk-header-web__main-action-search">
+                  <input class="govuk-input govuk-!-display-inline-block" id="idsk-header-web__main-action-search-input"
+                    name="search" placeholder="Zadajte hľadaný výraz" title="Zadajte hľadaný výraz" type="search"
+                    aria-label="Zadajte hľadaný výraz" />
+                  <button type="submit" class="govuk-button" data-module="govuk-button">
+                    <span class="govuk-visually-hidden">Vyhľadať</span>
+                    <i aria-hidden="true" class="fas fa-search"></i>
+                  </button>
+                </form>
+
+                <div class="idsk-header-web__main--buttons">
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="idsk-header-web__nav--divider"></div>
+      <div class="idsk-header-web__nav idsk-header-web__nav--mobile ">
+        <div class="govuk-width-container">
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full">
+
+            </div>
+            <div class="govuk-grid-column-full">
+              <nav class="">
+                <ul class="idsk-header-web__nav-list " aria-label="Hlavná navigácia">
+                  <li class="idsk-header-web__nav-list-item">
+                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria" title="Eurofondy">
+                      Domov
+                    </a>
+                  </li>
+                  <li class="idsk-header-web__nav-list-item">
+                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
+                      title="Regionálny rozvoj">
+                      Služby občanom
+                    </a>
+                  </li>
+                  <li class="idsk-header-web__nav-list-item">
+                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria" title="Informatizácia">
+                      Podnikanie
+                    </a>
+                  </li>
+                  <li class="idsk-header-web__nav-list-item">
+                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria" title="Investície">
+                      Vzdelávanie
+                    </a>
+                  </li>
+                  <li class="idsk-header-web__nav-list-item">
+                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="#5" title="Inovácie">
+                      Kultúra a voľný čas
+                    </a>
+                  </li>
+                  <li class="idsk-header-web__nav-list-item">
+                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="#5" title="Inovácie">
+                      Mestská rada
+                    </a>
+                  </li>
+
+                </ul>
+              </nav>
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+    </div>
+  </header>
+
+
+
+  <div class="govuk-width-container">
+    <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content">
+      <div data-module="idsk-intro-block">
+        <div class="idsk-intro-block ">
+          <div class="govuk-grid-row ">
+            <div class="govuk-grid-column-full govuk-grid-column-two-thirds-from-desktop">
+
+              <h2 class="govuk-heading-xl" style="margin-top: 50px; margin-bottom : 20px;">
+                Testovacia stránka pre verejny orgán
+              </h2>
+              <p class="govuk-body"> Toto je testovacia verzia a slúži výhradne na demonštračné účely. Všetky údaje a
+                interakcie na tejto stránke sú fiktívne a riadia sa podľa zákona č. 18/2018 Z. z. o ochrane osobných
+                údajov.
+              </p>
+              <div data-module="idsk-search-component" class="idsk-search-component   ">
+                <label class="" for="intro-block-search">
+                  Zadajte hľadaný výraz
+                </label>
+                <input class="govuk-input idsk-search-component__input " id="intro-block-search" name="search"
+                  type="search">
+                <button type="submit" class="idsk-button idsk-search-component__button ">
+
+                  <span class="govuk-visually-hidden">Vyhľadávanie
+                  </span>
+                </button>
+              </div>
+
+              <div>
+                <ul class="idsk-intro-block__list__ul">
+                  <li class="idsk-intro-block__bottom-menu__li govuk-caption-m">
+                    <span>Hľadáte toto?</span>
+                  </li>
+                  <li class="idsk-intro-block__list__li">
+                    <a class="govuk-link idsk-intro-block__list__a" href="/clanok" title="Aktuality z obce">
+                      Aktuality z obce
+                    </a>
+                  </li>
+                  <li class="idsk-intro-block__list__li">
+                    <a class="govuk-link idsk-intro-block__list__a" href="/clanok" title="Vedenie obce">
+                      Vedenie obce
+                    </a>
+                  </li>
+                  <li class="idsk-intro-block__list__li">
+                    <a class="govuk-link idsk-intro-block__list__a" href="/clanok" title="Rozpočet a financie">
+                      Rozpočet a financie
+                    </a>
+                  </li>
+
+                </ul>
+              </div>
+
+            </div>
+
+            <div class="idsk-intro-block__side-menu govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
+              <h2 class="govuk-heading-s">
+                Populárny obsah
+              </h2>
+              <ul class="idsk-intro-block__side-menu__ul">
+                <li class="idsk-intro-block__side-menu__li">
+                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#" title="Obečné zvesti">Obecne
+                    oznámenia</a>
+                </li>
+                <li class="idsk-intro-block__side-menu__li">
+                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#" title="Plánované podujatia">Plánované
+                    podujatia</a>
+                </li>
+                <li class="idsk-intro-block__side-menu__li">
+                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#" title="Služby občanom">Služby
+                    občanom</a>
+                </li>
+                <li class="idsk-intro-block__side-menu__li">
+                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#" title="Zásady komunálneho odpadu">Zásady
+                    komunálneho odpadu</a>
+                </li>
+                <li class="idsk-intro-block__side-menu__li">
+                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#"
+                    title="Rozvojové projekty obce">Rozvojové projekty obce</a>
+                </li>
+              </ul>
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+      <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
+
+      <h2 class="govuk-heading-l">Aktuality</h2>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full">
+
+
+          <div class="idsk-card idsk-card-hero">
+
+            <a href="/clanok" title="Článok 1">
+              <img class="idsk-card-img idsk-card-img-hero"
+                src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
+                alt="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!" aria-hidden="true" />
+            </a>
+
+            <div class="idsk-card-content idsk-card-content-hero">
+              <div class="idsk-card-meta-container">
+                <span class="idsk-card-meta idsk-card-meta-date"><a href="#" class="govuk-link"
+                    title="Pridané dňa: 1.7.2020">1.7.2020</a></span> <span class="idsk-card-meta idsk-card-meta-tag"><a
+                    href="/clanok" class="govuk-link" title="Tag 1">K</a></span><span
+                  class="idsk-card-meta idsk-card-meta-tag"><a href="#" class="govuk-link" title="Tag 2">Tag
+                    2</a></span>
+              </div>
+
+
+              <div class="idsk-heading idsk-heading-hero">
+                <a href="/clanok" class="idsk-card-title govuk-link"
+                  title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">Článok 1</a>
+              </div>
+
+              <p class="idsk-body idsk-body-hero">
+                Lorem ipsum dolor sit amet, consenctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+              </p>
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-one-third">
+
+
+          <div class="idsk-card idsk-card-secondary">
+
+            <a href="/clanok" title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">
+              <img class="idsk-card-img idsk-card-img-secondary"
+                src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
+                alt="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!" aria-hidden="true" />
+            </a>
+
+            <div class="idsk-card-content idsk-card-content-secondary">
+              <div class="idsk-card-meta-container">
+                <span class="idsk-card-meta idsk-card-meta-date"><a href="#" class="govuk-link"
+                    title="Pridané dňa: 1.7.2020">1.7.2020</a></span> <span class="idsk-card-meta idsk-card-meta-tag"><a
+                    href="/clanok" class="govuk-link" title="Tag 1">Tag 1</a></span><span
+                  class="idsk-card-meta idsk-card-meta-tag"><a href="#" class="govuk-link" title="Tag 2">Tag
+                    2</a></span>
+              </div>
+
+
+              <div class="idsk-heading idsk-heading-secondary">
+                <a href="#" class="idsk-card-title govuk-link"
+                  title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">Článok 2</a>
+              </div>
+
+              <p class="idsk-body idsk-body-secondary">
+                Lorem ipsum dolor sit amet, consenctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+              </p>
+
+            </div>
+          </div>
+
+        </div>
+        <div class="govuk-grid-column-one-third">
+
+
+          <div class="idsk-card idsk-card-secondary">
+
+            <a href="/clanok" title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">
+              <img class="idsk-card-img idsk-card-img-secondary"
+                src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
+                alt="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!" aria-hidden="true" />
+            </a>
+
+            <div class="idsk-card-content idsk-card-content-secondary">
+              <div class="idsk-card-meta-container">
+                <span class="idsk-card-meta idsk-card-meta-date"><a href="#" class="govuk-link"
+                    title="Pridané dňa: 1.7.2020">1.7.2020</a></span> <span class="idsk-card-meta idsk-card-meta-tag"><a
+                    href="/clanok" class="govuk-link" title="Tag 1">Tag 1</a></span><span
+                  class="idsk-card-meta idsk-card-meta-tag"><a href="#" class="govuk-link" title="Tag 2">Tag
+                    2</a></span>
+              </div>
+
+
+              <div class="idsk-heading idsk-heading-secondary">
+                <a href="/clanok" class="idsk-card-title govuk-link"
+                  title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">Článok 3</a>
+              </div>
+
+              <p class="idsk-body idsk-body-secondary">
+                Lorem ipsum dolor sit amet, consenctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+              </p>
+
+
+
+            </div>
+          </div>
+
+        </div>
+        <div class="govuk-grid-column-one-third">
+
+
+          <div class="idsk-card idsk-card-secondary">
+
+            <a href="/clanok" title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">
+              <img class="idsk-card-img idsk-card-img-secondary"
+                src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
+                alt="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!" aria-hidden="true" />
+            </a>
+
+            <div class="idsk-card-content idsk-card-content-secondary">
+              <div class="idsk-card-meta-container">
+                <span class="idsk-card-meta idsk-card-meta-date"><a href="#" class="govuk-link"
+                    title="Pridané dňa: 1.7.2020">1.7.2020</a></span> <span class="idsk-card-meta idsk-card-meta-tag"><a
+                    href="#" class="govuk-link" title="Tag 1">Tag 1</a></span><span
+                  class="idsk-card-meta idsk-card-meta-tag"><a href="#" class="govuk-link" title="Tag 2">Tag
+                    2</a></span>
+              </div>
+
+
+              <div class="idsk-heading idsk-heading-secondary">
+                <a href="/clanok" class="idsk-card-title govuk-link"
+                  title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">Článok 4</a>
+              </div>
+
+              <p class="idsk-body idsk-body-secondary">
+                Lorem ipsum dolor sit amet, consenctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
+                dolore magna aliqua.
+              </p>
+
+
+
+            </div>
+          </div>
+
+        </div>
+      </div>
+
+      <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
+      <h2 class="govuk-heading-l">Dôležité odkazy</h2>
+      <div class="govuk-body-m"></div>
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-row no govuk-!-padding-top-0 govuk-!-padding-bottom-0 row-with-boxes">
+          <!-- Oznámenia obce -->
+          <div class="govuk-grid-column-one-quarter card">
+            <a href="#"
+              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+              <div>
+                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                  <i class="fas fa-bullhorn"></i>
+                </span>
+                <p class="govuk-body">
+                  <strong>Oznámenia obce</strong>
+                </p>
+              </div>
+            </a>
+          </div>
+          <!-- Kultúrne podujatia -->
+          <div class="govuk-grid-column-one-quarter card">
+            <a href="#"
+              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+              <div>
+                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                  <i class="fas fa-theater-masks"></i>
+                </span>
+                <p class="govuk-body">
+                  <strong>Kultúrne podujatia</strong>
+                </p>
+              </div>
+            </a>
+          </div>
+          <!-- Zápisnice z rokovaní -->
+          <div class="govuk-grid-column-one-quarter card">
+            <a href="#"
+              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+              <div>
+                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                  <i class="fas fa-clipboard-list"></i>
+                </span>
+                <p class="govuk-body">
+                  <strong>Zápisnice z rokovaní</strong>
+                </p>
+              </div>
+            </a>
+          </div>
+          <!-- Mapa obce -->
+          <div class="govuk-grid-column-one-quarter card">
+            <a href="#"
+              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+              <div>
+                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                  <i class="fas fa-map-marker-alt"></i>
+                </span>
+                <p class="govuk-body">
+                  <strong>Mapa obce</strong>
+                </p>
+              </div>
+            </a>
+          </div>
+          <!-- Školy a škôlky -->
+          <div class="govuk-grid-column-one-quarter card">
+            <a href="#"
+              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+              <div>
+                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                  <i class="fas fa-school"></i>
+                </span>
+                <p class="govuk-body">
+                  <strong>Školy a škôlky</strong>
+                </p>
+              </div>
+            </a>
+          </div>
+          <!-- Obecné dokumenty -->
+          <div class="govuk-grid-column-one-quarter card">
+            <a href="#"
+              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+              <div>
+                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                  <i class="fas fa-folder-open"></i>
+                </span>
+                <p class="govuk-body">
+                  <strong>Obecné dokumenty</strong>
+                </p>
+              </div>
+            </a>
+          </div>
+          <!-- Kontaktné informácie -->
+          <div class="govuk-grid-column-one-quarter card">
+            <a href="#"
+              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+              <div>
+                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                  <i class="fas fa-phone-alt"></i>
+                </span>
+                <p class="govuk-body">
+                  <strong>Kontaktné informácie</strong>
+                </p>
+              </div>
+            </a>
+          </div>
+          <!-- Plány a projekty -->
+          <div class="govuk-grid-column-one-quarter card">
+            <a href="#"
+              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+              <div>
+                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                  <i class="fas fa-chart-line"></i>
+                </span>
+                <p class="govuk-body">
+                  <strong>Plány a projekty</strong>
+                </p>
+              </div>
+            </a>
+          </div>
+        </div>
+      </div>
+
+
+      <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full govuk-!-margin-bottom-5">
+          <h2 class="govuk-heading-l">Návody pre občanov</h2>
+          <p class="govuk-body-m">Krok za krokom vám ukážeme, ako elektronicky podať rôzne tlačivá a iné dokumenty. Viac
+            informácií nájdete na <a class="govuk-link" href="#" title="podstránke Návody">podstránke Návody</a>.</p>
+        </div>
+
+        <div class="govuk-grid-column-one-half">
+
+          <div data-module="idsk-crossroad" class="">
+            <div class="idsk-crossroad idsk-crossroad-1">
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Ako vyplniť daňové tlačivo"
+                  aria-hidden="false">Ako vyplniť daňové tlačivo
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Postup vyplnenia daňového priznania online.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Ako zaregistrovať psa"
+                  aria-hidden="false">Ako zaregistrovať psa
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Návod na elektronickú registráciu vášho psa.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Ako obnoviť vodičský preukaz"
+                  aria-hidden="false">Ako obnoviť vodičský preukaz
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Postup obnovy vodičského preukazu online.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Ako podať žiadosť o stavebné povolenie"
+                  aria-hidden="false">Ako podať žiadosť o stavebné povolenie
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Kroky pre podanie žiadosti o stavebné povolenie
+                  online.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="govuk-grid-column-one-half idsk-intro-block">
+          <div class="app-pane-blue">
+            <h4 class="govuk-heading-l govuk-!-margin-bottom-2">B2G služby pre podnikateľov</h4>
+            <ul class="idsk-intro-block__side-menu__ul">
+              <li class="idsk-intro-block__side-menu__li">
+                <a class="idsk-intro-block__side-menu__a" href="#" title="Ako zaregistrovať firmu online">Ako
+                  zaregistrovať firmu online</a>
+              </li>
+              <li class="idsk-intro-block__side-menu__li">
+                <a class="idsk-intro-block__side-menu__a" href="#"
+                  title="Elektronické fakturácie pre podnikateľov">Elektronické fakturácie pre podnikateľov</a>
+              </li>
+              <li class="idsk-intro-block__side-menu__li">
+                <a class="idsk-intro-block__side-menu__a" href="#"
+                  title="Návod na elektronické podanie daňového priznania">Návod na elektronické podanie daňového
+                  priznania</a>
+              </li>
+              <li class="idsk-intro-block__side-menu__li">
+                <a class="idsk-intro-block__side-menu__a" href="#" title="Ako požiadať o podnikateľský úver">Ako
+                  požiadať o podnikateľský úver</a>
+              </li>
+              <li class="idsk-intro-block__side-menu__li">
+                <a class="idsk-intro-block__side-menu__a" href="#"
+                  title="Elektronická komunikácia s úradmi">Elektronická komunikácia s úradmi</a>
+              </li>
+              <li class="idsk-intro-block__side-menu__li">
+                <a class="idsk-intro-block__side-menu__a" href="#" title="Ako získať certifikát pre podnikateľa">Ako
+                  získať certifikát pre podnikateľa</a>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+
+
+      <hr class="idsk-hr-separator-until-tablet govuk-!-margin-bottom-6">
+
+
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full govuk-!-margin-bottom-5">
+          <h2 class="govuk-heading-l">Elektronické podanie tlačív</h2>
+          <p class="govuk-body-m">
+            Všetky informácie o elektronickom podaní tlačív v podmienkach SR na jednom mieste. Viac informácií nájdete
+            na
+            <a class="govuk-link" href="#" title="podstránke Elektronické podanie tlačív">podstránke Elektronické
+              podanie tlačív</a>.
+          </p>
+        </div>
+        <div class="govuk-grid-column-full">
+
+          <div data-module="idsk-crossroad" class="">
+            <div class="idsk-crossroad idsk-crossroad-2">
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Podanie daní z nehnuteľností"
+                  aria-hidden="false">Podanie daní z nehnuteľností
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Podajte daň z nehnuteľnosti online a ušetrite
+                  čas.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Elektronické podanie DPH"
+                  aria-hidden="false">Elektronické podanie DPH
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Rýchly a pohodlný spôsob, ako podať DPH online.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Elektronické podanie daňového priznania"
+                  aria-hidden="false">Elektronické podanie daňového priznania
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Komplexné riešenie pre podnikateľov a fyzické
+                  osoby.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+            </div>
+            <div class="idsk-crossroad idsk-crossroad-2">
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Podanie žiadosti o dotácie"
+                  aria-hidden="false">Podanie žiadosti o dotácie
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Využite online platformu na podanie žiadostí.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Elektronické podanie ročnej uzávierky"
+                  aria-hidden="false">Elektronické podanie ročnej uzávierky
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Jednoduché a rýchle riešenie pre podnikateľov.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+              <div class="idsk-crossroad__item ">
+                <a href="#" class="govuk-link idsk-crossroad-title" title="Kontakty" aria-hidden="false">Kontakty
+                </a>
+                <p class="idsk-crossroad-subtitle" aria-hidden="false">Máte otázky? Kontaktujte nás.
+                </p>
+                <hr class="idsk-crossroad-line" aria-hidden="true" />
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+
+      <div class="idsk-blue-banner">
+        <div class="idsk-blue-banner__wrapper">
+          <div class="govuk-grid-column-two-thirds govuk-!-margin-bottom-6 idsk-blue-banner_description">
+            <h2 class="govuk-heading-l" style="color: white !important;">Budúcnosť je tu!</h2>
+            <div class="govuk-caption-l">
+              Prečo strácať čas čakaním na úrade, keď môžete všetko vybaviť z pohodlia domova? Objavte výhody
+              elektronického vybavovania a prejdite na digitálny spôsob.
+            </div>
+            <br>
+            <a href="#" class="govuk-link" title="Zistiť viac o elektronických službách">Zistiť viac o elektronických
+              službách</a>
+            <br>
+          </div>
+          <div class="govuk-grid-column-one-third idsk-blue-banner__image">
+
+          </div>
+        </div>
+      </div>
+
+      <div class="govuk-grid-row">
+        <div class="govuk-grid-column-full govuk-!-margin-bottom-5">
+          <h2 class="govuk-heading-l">Povinné zverejnovanie faktúr a zmúv</h2>
+          <p class="govuk-body-m">
+            Slovensko je neodlučnou súčasťou európskeho digitálneho priestoru, ktorý pomáha formovať strategické
+            smerovanie digitalizácie u nás. Viac informácií
+            nájdete na <a class="govuk-link" href="#" title="podstránke Informatizácia">na podstránke
+              Informatizácia</a>.
+          </p>
+        </div>
+        <div class="govuk-grid-column-full">
+          <!-- Prvý stĺpec -->
+          <div class="govuk-grid-column-half">
+            <div data-module="idsk-crossroad" class="">
+              <div class="idsk-crossroad idsk-crossroad-2">
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Zmluvy obce" aria-hidden="false">Zmluvy
+                    obce</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Prehľad všetkých zmlúv obce.</p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Faktúry obce" aria-hidden="false">Faktúry
+                    obce</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Zoznam a detaily všetkých faktúr obce.</p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Zmluvy obce" aria-hidden="false">Zmluvy
+                    obce</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Prehľad všetkých zmlúv obce.</p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Položka 1" aria-hidden="false">Položka
+                    1</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Popis pre položku 1.</p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Položka 2" aria-hidden="false">Položka
+                    2</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Popis pre položku 2.</p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+          <!-- Druhý stĺpec -->
+          <div class="govuk-grid-column-half">
+            <div data-module="idsk-crossroad" class="">
+              <div class="idsk-crossroad idsk-crossroad-2">
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Dodávatelia obce"
+                    aria-hidden="false">Dodávatelia obce</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Zoznam dodávateľov spolupracujúcich s obcou.
+                  </p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Podmienky zmluvy"
+                    aria-hidden="false">Podmienky zmluvy</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Podmienky a detaily typických zmlúv obce.</p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Zmluvy obce" aria-hidden="false">Zmluvy
+                    obce</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Prehľad všetkých zmlúv obce.</p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Položka 1" aria-hidden="false">Položka
+                    1</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Popis pre položku 1.</p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+
+                <div class="idsk-crossroad__item">
+                  <a href="#" class="govuk-link idsk-crossroad-title" title="Položka 2" aria-hidden="false">Položka
+                    2</a>
+                  <p class="idsk-crossroad-subtitle" aria-hidden="false">Popis pre položku 2.</p>
+                  <hr class="idsk-crossroad-line" aria-hidden="true" />
+                </div>
+
+              </div>
+            </div>
+          </div>
+
+        </div>
+      </div>
+    </main>
+  </div>
+
+  <div data-module="idsk-footer-extended">
+    <footer class="idsk-footer-extended  ">
+      <div class="idsk-footer-extended-main-content">
+        <div class="govuk-width-container">
+          <div class="govuk-grid-column-full">
+            <div class="idsk-footer-extended-description-panel">
+              <div class="idsk-footer-extended-meta-item">
+                <ul class="idsk-footer-extended-inline-list ">
+                  <li class="idsk-footer-extended-inline-list-item">
+                    <a class="govuk-link" title="Pomoc" href="#">
+                      Pomoc
+                    </a>
+                  </li>
+                  <li class="idsk-footer-extended-inline-list-item">
+                    <a class="govuk-link" title="Cookies" href="/prihlasenie">
+                      Prihlásenie
+                    </a>
+                  </li>
+                  <li class="idsk-footer-extended-inline-list-item">
+                    <a class="govuk-link" title="Kontakty" href="#">
+                      Kontakty
+                    </a>
+                  </li>
+                  <li class="idsk-footer-extended-inline-list-item">
+                    <a class="govuk-link" title="Mapa Stránky" href="#">
+                      Mapa Stránky
+                    </a>
+                  </li>
+                  <li class="idsk-footer-extended-inline-list-item">
+                    <a class="govuk-link" title="RSS" href="#">
+                      RSS
+                    </a>
+                  </li>
+                  <li class="idsk-footer-extended-inline-list-item">
+                    <a class="govuk-link" title="Vyhlásenie o prístupnosti" href="#">
+                      Vyhlásenie o prístupnosti
+                    </a>
+                  </li>
+                </ul>
+              </div>
+              <div class="govuk-grid-column-two-thirds idsk-footer-extended-info-links">
+                <p class="idsk-footer-extended-frame">Vytvorené v súlade s
+                  <a class="govuk-link" title="Jednotným dizajn manuálom elektronických služieb." href="#">
+                    Jednotným dizajn manuálom elektronických služieb.
+                  </a>
+                </p>
+
+              </div>
+              <div class="govuk-grid-column-one-third idsk-footer-extended-logo-box">
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </footer>
+  </div>
+
+  <script>window.GOVUKFrontend.initAll()</script>
+</body>

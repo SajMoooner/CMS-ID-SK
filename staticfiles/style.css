@@ -1,0 +1,153 @@
+#main-content {
+    padding-top: 0;
+  }
+
+  body {
+    overflow-x: hidden;
+    background-color: black;
+  }
+
+  h2{
+    color:#003078 !important;
+  }
+
+  .idsk-intro-block .app-pane-blue {
+    padding: 20px;
+    margin: 45px;
+  }
+
+  @media (max-width: 40.0625em) {
+    .govuk-grid-column-one-half.idsk-intro-block {
+      padding: 0;
+    }
+
+    .govuk-grid-column-one-half.idsk-intro-block .app-pane-blue {
+      margin: 0;
+    }
+  }
+
+  .idsk-events-list {
+    font-family: "Source Sans Pro", "Arial", sans-serif;
+    display: -webkit-box;
+    display: -webkit-flex;
+    display: -ms-flexbox;
+    display: flex;
+    flex-wrap: wrap;
+  }
+
+  .idsk-events-list>.govuk-grid-column-one-third {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .idsk-events-list__block {
+    height: 100%;
+    position: relative;
+  }
+
+  .idsk-events-list__event-title {
+    margin-bottom: 40px;
+  }
+
+  .idsk-events-list__event-title .govuk-link {
+    text-decoration: none;
+  }
+
+  .idsk-events-list__event-desc {
+    position: absolute;
+    height: auto;
+    width: 100%;
+    bottom: 15px;
+  }
+
+  .idsk-blue-banner {
+    background-color: #003078;
+    padding: 30px 0;
+    margin: 30px 0;
+    height: 100%;
+    position: relative;
+    display: inline-block;
+  }
+
+  .idsk-blue-banner .govuk-heading-l,
+  .idsk-blue-banner .govuk-caption-l,
+  .idsk-blue-banner .govuk-link {
+    color: white;
+  }
+
+  .idsk-blue-banner .govuk-link:focus {
+    color: black;
+  }
+
+  .idsk-blue-banner .govuk-grid-column-two-thirds {
+    padding: 0;
+  }
+
+  .idsk-blue-banner::before {
+    content: "";
+    background: #003078;
+    position: absolute;
+    width: calc((100vw - 100%) / 2);
+    height: 100%;
+    left: calc((100vw - 100%) / -2);
+    top: 0;
+    overflow: hidden;
+  }
+
+  .idsk-blue-banner::after {
+    content: "";
+    background: #003078;
+    position: absolute;
+    width: calc((100vw - 100%) / 2);
+    height: 100%;
+    right: calc((100vw - 100%) / -2);
+    top: 0;
+    overflow: hidden;
+  }
+
+  .idsk-blue-banner__wrapper {
+    display: flex;
+    flex-flow: row;
+    text-align: right;
+  }
+
+  .idsk-blue-banner_description {
+    text-align: left;
+  }
+
+  .idsk-blue-banner__image {
+    align-self: center;
+    display: flex;
+    flex-direction: row-reverse;
+  }
+
+  @media (max-width: 40.0625em) {
+    .idsk-blue-banner__wrapper {
+      flex-flow: column;
+      flex-direction: column-reverse;
+      text-align: center;
+    }
+
+    .idsk-blue-banner__image {
+      display: block;
+      margin-bottom: 30px;
+    }
+  }
+
+  .hero-image-container {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+}
+
+.hero-image {
+    width: 100%;
+    height: auto;
+    display: block;
+}
+
+@media (max-width: 767px) {
+  .idsk-header-web__main-action-search {
+      display: none;
+  }
+}
