@@ -48,15 +48,29 @@ Projekt nasleduje filozofiu Django, kde každá appka slúži jednému účelu.
 
 - Projekt obsahuje aj varovania, ale netreba sa ich báť, pretože zákony sú vymyslené.
 - Hlavným zámerom je vytvoriť jednoduché CMS pre správu štátnych webov ako alternatíva k WordPressu.
+- Tento CMS systém nie je určený ako centrálny systém. Bol navrhnutý a vyvinutý v súlade s požiadavkami UVO pre vývoj softvéru.
+
 
 ## Systém v praxi:
 
-![MainPage Image](obrazok_mainpage.png)
-![CategoryPage Image](obrazok_categorypage.png)
-![ArticlePage Image](obrazok_articlepage.png)
-![LoginPage Image](obrazok_loginpage.png)
-![AdminPage Image](obrazok_adminpage.png)
+# MainPage
 
----
+<img width="823" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/a1df576b-9217-42c8-8569-c5fcbd43f932">
 
-Ak máte akékoľvek otázky alebo pripomienky, prosím, neváhajte nás kontaktovať. Ďakujeme za využitie našeho CMS!
+# CategoryPage
+
+<img width="595" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/6a1df68d-9f59-4313-a7d1-cba81551c7ae">
+
+# ArticlePage
+
+<img width="781" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/511c27fe-b51d-4930-bc1b-fcaacb33b234">
+
+# LoginPage
+
+<img width="715" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/d3cf425f-9e8f-4869-8ab2-aab054bfc408">
+
+# AdminPage
+
+<img width="674" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/48fd37c3-b7cf-43d0-8eef-490dffeebe5f">
+
+
