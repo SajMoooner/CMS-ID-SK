@@ -1,4 +1,4 @@
-# CMS pre štátne webstránky (ID-SK dizajn)
+# Vlastné CMS pre štátne webstránky (ID-SK dizajn)
 
 Toto CMS je navrhnuté špeciálne pre štátne webstránky, so zreteľom na ID-SK dizajn. Cieľom je nielen zabezpečiť jednotný dizajn pre všetky štátne webové stránky, ale aj zabezpečiť ich praktickú funkčnosť prostredníctvom online formulárov a UX dizajnu založeného na strome životných situácií občana.
 
