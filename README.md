@@ -14,7 +14,8 @@ Toto CMS je navrhnuté špeciálne pre štátne webstránky, so zreteľom na ID-
 Projekt nasleduje filozofiu Django, kde každá appka slúži jednému účelu. 
 
 - **MainPage**: Uvodná obrazovka
-  
+  <img width="823" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/af8bde70-5927-464b-8945-f997a97c2af4">
+
   
 - **CategoryPage**: Zobrazuje stránky podľa kategórie.
   
