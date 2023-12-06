@@ -28,8 +28,8 @@ Projekt nasleduje filozofiu Django, kde každá appka slúži jednému účelu.
 - **LoginPage**: Stránka, ktorá umožňuje prístup do AdminPage. Slúži ako login s kódom mesta, aby bolo jasné, ktorému používateľovi sa čo zobrazuje.
   
 - **AdminPage**: Slúži pre CRUD operácie 
-- Pridanie/Uprava/Odstranenie kategórií
-- Pridanie/Uprava/Odstranenie článkov
+    - Pridanie/Uprava/Odstranenie kategórií
+    - Pridanie/Uprava/Odstranenie článkov
 
 ### Priečinky a súbory:
 
