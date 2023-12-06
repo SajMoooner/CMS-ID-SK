@@ -5,6 +5,7 @@ Toto CMS je navrhnuté špeciálne pre štátne webstránky, so zreteľom na ID-
 ## Demo
 
 Celý projekt môžete otestovať na [mesto.slovakosoft.sk](https://mesto.slovakosoft.sk/).
+Admin časť sa nachádza na [mesto.slovakosoft.sk/uvod](https://mesto.slovakosoft.sk/uvod).
 
 ## Hlavné vlastnosti:
 
@@ -26,7 +27,9 @@ Projekt nasleduje filozofiu Django, kde každá appka slúži jednému účelu.
   
 - **LoginPage**: Stránka, ktorá umožňuje prístup do AdminPage. Slúži ako login s kódom mesta, aby bolo jasné, ktorému používateľovi sa čo zobrazuje.
   
-- **AdminPage**: Slúži pre CRUD operácie a nič iné.
+- **AdminPage**: Slúži pre CRUD operácie 
+- Pridanie/Uprava/Odstranenie kategórií
+- Pridanie/Uprava/Odstranenie článkov
 
 ### Priečinky a súbory:
 
