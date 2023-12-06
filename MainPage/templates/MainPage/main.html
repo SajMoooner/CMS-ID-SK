@@ -110,63 +110,154 @@
         <div class="govuk-width-container">
           <div class="govuk-grid-row">
             <div class="govuk-grid-column-full">
-
             </div>
             <div class="govuk-grid-column-full">
+              <!-- Navigation block -->
               <nav class="">
-                <ul class="idsk-header-web__nav-list " aria-label="Hlavná navigácia">
+                <!-- Unordered list to hold the navigation items -->
+                <ul class="idsk-header-web__nav-list" aria-label="Hlavná navigácia">
+                  <!-- Loop through each category passed from the context -->
+                  {% for category in categories %}
                   <li class="idsk-header-web__nav-list-item">
-                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria" title="Eurofondy">
-                      Domov
+                    <!-- Check if the current category has subcategories -->
+                    {% if category.subcategories.all %}
+                    <!-- This link acts as a dropdown trigger for subcategories -->
+                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="#" title="{{ category.name }}"
+                      aria-label="Rozbaliť {{ category.name }} menu" aria-expanded="false"
+                      data-text-for-hide="Zavrieť {{ category.name }} menu"
+                      data-text-for-show="Rozbaliť {{ category.name }} menu">
+                      {{ category.name }}
+                      <!-- Visual elements for the link indicating a dropdown -->
+                      <div class="idsk-header-web__link-arrow"></div>
+                      <div class="idsk-header-web__link-arrow-mobile"></div>
                     </a>
-                  </li>
-                  <li class="idsk-header-web__nav-list-item">
-                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
-                      title="Regionálny rozvoj">
-                      Služby občanom
+                    <!-- Submenu container for subcategories -->
+                    <div class="idsk-header-web__nav-submenulite">
+                      <!-- Unordered list to hold subcategories -->
+                      <ul class="idsk-header-web__nav-submenulite-list" aria-label="{{ category.name }} submenu">
+                        <!-- Loop through each subcategory of the current category -->
+                        {% for subcategory in category.subcategories.all %}
+                        <li class="idsk-header-web__nav-submenulite-list-item">
+                          <!-- Link to the subcategory page -->
+                          <a class="govuk-link idsk-header-web__nav-submenulite-list-item-link" href="#"
+                            title="{{ subcategory.name }}">
+                            <span>{{ subcategory.name }}</span>
+                          </a>
+                        </li>
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    <!-- If there are no subcategories, just display a regular link -->
+                    {% else %}
+                    <a class="govuk-link idsk-header-web__nav-list-item-link"
+                      href="/kategoria/{{ category.name|slugify }}" title="{{ category.name }}">
+                      {{ category.name}}
                     </a>
+                    {% endif %}
                   </li>
-                  <li class="idsk-header-web__nav-list-item">
-                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria" title="Informatizácia">
-                      Podnikanie
-                    </a>
-                  </li>
-                  <li class="idsk-header-web__nav-list-item">
-                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria" title="Investície">
-                      Vzdelávanie
-                    </a>
-                  </li>
-                  <li class="idsk-header-web__nav-list-item">
-                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="#5" title="Inovácie">
-                      Kultúra a voľný čas
-                    </a>
-                  </li>
-                  <li class="idsk-header-web__nav-list-item">
-                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="#5" title="Inovácie">
-                      Mestská rada
-                    </a>
-                  </li>
-
+                  {% endfor %}
                 </ul>
               </nav>
             </div>
           </div>
-
+         
         </div>
       </div>
 
     </div>
   </header>
 
+  <style>
+    .card {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background-color: #fff;
+      border: none;
+      box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+      border-radius: 10px;
+      padding: 20px;
+
+      width: 240px;
+      /* Alebo iná šírka podľa potreby */
+      height: 120px;
+      /* Alebo iná výška podľa potreby */
+      text-align: center;
+      font-size: 16px;
+      text-decoration: none;
+      color: #000;
+      transition: transform 0.2s;
+      box-sizing: border-box;
+      /* Uistite sa, že padding a border sú zahrnuté do šírky karty */
+      margin: 5px;
+      /* Malý priestor medzi kartami */
+      flex: 0 1 calc(25% - 10px);
+      /* Flexibilný rast, flexibilný základ, automatická šírka s odpočítaním margin */
+    }
+
+    .card:hover {
+      transform: scale(1.05);
+    }
+
+    .card i {
+      font-size: 3em;
+      /* Veľkosť ikony */
+      color: #005ea5;
+      /* Farba ikony */
+    }
+
+    .card p {
+      font-weight: bold;
+      margin-top: 10px;
+    }
+
+    @media (max-width: 767px) {
+      .card {
+        flex: 0 1 calc(100% - 10px);
+        /* 1 karta na celú šírku */
+      }
+    }
+
+    /* Mediá query pre stredne veľké obrazovky (napr. tablety) */
+    @media (min-width: 768px) and (max-width: 991px) {
+      .card {
+        flex: 0 1 calc(50% - 10px);
+        /* 2 karty v riadku */
+      }
+    }
+
+    /* Mediá query pre veľké obrazovky (od 992px a viac) */
+    @media (min-width: 992px) {
+      .card {
+        flex: 0 1 calc(25% - 10px);
+        /* 4 karty v riadku */
+      }
+    }
+  </style>
 
 
   <div class="govuk-width-container">
+    
     <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content">
-      <div data-module="idsk-intro-block">
-        <div class="idsk-intro-block ">
-          <div class="govuk-grid-row ">
-            <div class="govuk-grid-column-full govuk-grid-column-two-thirds-from-desktop">
+     
+      <div class="px-4 py-5 my-5 text-center" style="
+      background-image: url('/static/MainPage/assets/images/kosice.jpg?width=3440;height=840');
+      background-position: center;
+      background-size: cover;
+      background-repeat: no-repeat;
+      width: 100vw;
+      height: 350px;
+      margin-left: calc(-50vw + 50%);
+      position: relative;
+     ">
+     </div>
 
+      <div data-module="idsk-intro-block ">
+        <div class="idsk-intro-block  " >
+          <div class="govuk-grid-row">
+            <div class="govuk-grid-column-full govuk-grid-column " >
+              
               <h2 class="govuk-heading-xl" style="margin-top: 50px; margin-bottom : 20px;">
                 Testovacia stránka pre verejny orgán
               </h2>
@@ -210,316 +301,155 @@
 
                 </ul>
               </div>
-
-            </div>
-
-            <div class="idsk-intro-block__side-menu govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
-              <h2 class="govuk-heading-s">
-                Populárny obsah
-              </h2>
-              <ul class="idsk-intro-block__side-menu__ul">
-                <li class="idsk-intro-block__side-menu__li">
-                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#" title="Obečné zvesti">Obecne
-                    oznámenia</a>
-                </li>
-                <li class="idsk-intro-block__side-menu__li">
-                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#" title="Plánované podujatia">Plánované
-                    podujatia</a>
-                </li>
-                <li class="idsk-intro-block__side-menu__li">
-                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#" title="Služby občanom">Služby
-                    občanom</a>
-                </li>
-                <li class="idsk-intro-block__side-menu__li">
-                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#" title="Zásady komunálneho odpadu">Zásady
-                    komunálneho odpadu</a>
-                </li>
-                <li class="idsk-intro-block__side-menu__li">
-                  <a class="govuk-link idsk-intro-block__side-menu__a" href="#"
-                    title="Rozvojové projekty obce">Rozvojové projekty obce</a>
-                </li>
-              </ul>
             </div>
 
           </div>
         </div>
       </div>
+     
+      <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
+      <div class="govuk-grid-row" style="display: flex; flex-wrap: wrap; margin-right: -5px; margin-left: -5px;">
+        <!-- Podnikateľ -->
+
+        <a href="" class="card">
+          <i class="fas fa-briefcase"></i>
+          <p>Podnikateľ</p>
+        </a>
+
+        <!-- Občan -->
+
+        <a href="" class="card">
+          <i class="fas fa-user"></i>
+          <p>Občan</p>
+        </a>
+
+        <!-- Rodič -->
+
+        <a href="" class="card">
+          <i class="fas fa-child"></i>
+          <p>Rodič</p>
+        </a>
+
+        <!-- Dôchodca -->
+
+        <a href="" class="card">
+          <i class="fas fa-heart"></i>
+          <p>Dôchodca</p>
+        </a>
+
+        <!-- Ekonomické oddelenie -->
+
+        <a href="" class="card">
+          <i class="fas fa-chart-line"></i>
+          <p>Ekonomické oddelenie</p>
+        </a>
+
+        <!-- Odpadové oddelenie -->
+
+        <a href="" class="card">
+          <i class="fas fa-recycle"></i>
+          <p>Odpadové oddelenie</p>
+        </a>
+
+        <!-- Kultúrne oddelenie -->
+
+        <a href="" class="card">
+          <i class="fas fa-theater-masks"></i>
+          <p>Kultúrne oddelenie</p>
+        </a>
+
+        <!-- Športové oddelenie -->
+
+        <a href="" class="card">
+          <i class="fas fa-futbol"></i>
+          <p>Športové oddelenie</p>
+        </a>
+
+
+      </div>
+
 
 
       <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
 
       <h2 class="govuk-heading-l">Aktuality</h2>
+      {% if hero_article %}
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full">
-
-
           <div class="idsk-card idsk-card-hero">
-
-            <a href="/clanok" title="Článok 1">
-              <img class="idsk-card-img idsk-card-img-hero"
-                src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
-                alt="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!" aria-hidden="true" />
+            <a href="/clanok/{{ hero_article.id }}" title="{{ hero_article.title }}">
+              {% if hero_article.image %}
+                <img class="idsk-card-img idsk-card-img-hero"
+                  src="{{ hero_article.image.url }}"
+                  alt="{{ hero_article.title }}" aria-hidden="true" />
+              {% else %}
+                <img class="idsk-card-img idsk-card-img-hero" 
+                  src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
+                  alt="Placeholder Image" aria-hidden="true" />
+              {% endif %}
             </a>
-
+  
             <div class="idsk-card-content idsk-card-content-hero">
-              <div class="idsk-card-meta-container">
-                <span class="idsk-card-meta idsk-card-meta-date"><a href="#" class="govuk-link"
-                    title="Pridané dňa: 1.7.2020">1.7.2020</a></span> <span class="idsk-card-meta idsk-card-meta-tag"><a
-                    href="/clanok" class="govuk-link" title="Tag 1">K</a></span><span
-                  class="idsk-card-meta idsk-card-meta-tag"><a href="#" class="govuk-link" title="Tag 2">Tag
-                    2</a></span>
-              </div>
-
-
+              <!-- Detaily článku -->
               <div class="idsk-heading idsk-heading-hero">
-                <a href="/clanok" class="idsk-card-title govuk-link"
-                  title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">Článok 1</a>
+                <a href="/clanok/{{ hero_article.id }}" class="idsk-card-title govuk-link"
+                    title="{{ hero_article.title }}">{{ hero_article.title }}</a>
               </div>
-
               <p class="idsk-body idsk-body-hero">
-                Lorem ipsum dolor sit amet, consenctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
+                {{ hero_article.content|truncatewords:20 }}
               </p>
-
             </div>
           </div>
-
         </div>
       </div>
+    {% endif %}
       <div class="govuk-grid-row">
-        <div class="govuk-grid-column-one-third">
-
-
+        
+        
+          {% for article in other_articles %}
+          <div class="govuk-grid-column-one-third">
           <div class="idsk-card idsk-card-secondary">
-
-            <a href="/clanok" title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">
-              <img class="idsk-card-img idsk-card-img-secondary"
-                src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
-                alt="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!" aria-hidden="true" />
-            </a>
-
-            <div class="idsk-card-content idsk-card-content-secondary">
-              <div class="idsk-card-meta-container">
-                <span class="idsk-card-meta idsk-card-meta-date"><a href="#" class="govuk-link"
-                    title="Pridané dňa: 1.7.2020">1.7.2020</a></span> <span class="idsk-card-meta idsk-card-meta-tag"><a
-                    href="/clanok" class="govuk-link" title="Tag 1">Tag 1</a></span><span
-                  class="idsk-card-meta idsk-card-meta-tag"><a href="#" class="govuk-link" title="Tag 2">Tag
-                    2</a></span>
+              <a href="/clanok/{{ article.id }}" title="{{ article.title }}">
+                  {% if article.image %}
+                  
+                      <img class="idsk-card-img idsk-card-img-secondary"
+                          src="{{ article.image.url }}"
+                          alt="{{ article.title }}" aria-hidden="true"
+                          style="width:100ox;height:200x;" />
+                  {% else %}
+                      <img class="idsk-card-img idsk-card-img-secondary" 
+                          src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
+                          alt="Placeholder Image" aria-hidden="true" />
+                  {% endif %}
+              </a>
+      
+              <div class="idsk-card-content idsk-card-content-secondary">
+                  <div class="idsk-card-meta-container">
+                      <span class="idsk-card-meta idsk-card-meta-date">
+                          <a href="#" class="govuk-link" title="Pridané dňa: {{ article.created_at|date:'d.m.Y' }}">
+                              {{ article.created_at|date:"d.m.Y" }}
+                          </a>
+                      </span> 
+                      <span class="idsk-card-meta idsk-card-meta-tag"><a
+                        href="" class="govuk-link" title="Tag 1">{{article.category}}</a></span>
+                  </div>
+      
+                  <div class="idsk-heading idsk-heading-secondary">
+                      <a href="/clanok/{{ article.id }}" class="idsk-card-title govuk-link"
+                          title="{{ article.title }}">{{ article.title }}</a>
+                  </div>
+      
+                  <p class="idsk-body idsk-body-secondary">
+                    {{ article.content|truncatewords:10 }}
+                </p>
               </div>
-
-
-              <div class="idsk-heading idsk-heading-secondary">
-                <a href="#" class="idsk-card-title govuk-link"
-                  title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">Článok 2</a>
-              </div>
-
-              <p class="idsk-body idsk-body-secondary">
-                Lorem ipsum dolor sit amet, consenctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-              </p>
-
-            </div>
           </div>
-
         </div>
-        <div class="govuk-grid-column-one-third">
-
-
-          <div class="idsk-card idsk-card-secondary">
-
-            <a href="/clanok" title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">
-              <img class="idsk-card-img idsk-card-img-secondary"
-                src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
-                alt="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!" aria-hidden="true" />
-            </a>
-
-            <div class="idsk-card-content idsk-card-content-secondary">
-              <div class="idsk-card-meta-container">
-                <span class="idsk-card-meta idsk-card-meta-date"><a href="#" class="govuk-link"
-                    title="Pridané dňa: 1.7.2020">1.7.2020</a></span> <span class="idsk-card-meta idsk-card-meta-tag"><a
-                    href="/clanok" class="govuk-link" title="Tag 1">Tag 1</a></span><span
-                  class="idsk-card-meta idsk-card-meta-tag"><a href="#" class="govuk-link" title="Tag 2">Tag
-                    2</a></span>
-              </div>
-
-
-              <div class="idsk-heading idsk-heading-secondary">
-                <a href="/clanok" class="idsk-card-title govuk-link"
-                  title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">Článok 3</a>
-              </div>
-
-              <p class="idsk-body idsk-body-secondary">
-                Lorem ipsum dolor sit amet, consenctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-              </p>
-
-
-
-            </div>
-          </div>
-
-        </div>
-        <div class="govuk-grid-column-one-third">
-
-
-          <div class="idsk-card idsk-card-secondary">
-
-            <a href="/clanok" title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">
-              <img class="idsk-card-img idsk-card-img-secondary"
-                src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}"
-                alt="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!" aria-hidden="true" />
-            </a>
-
-            <div class="idsk-card-content idsk-card-content-secondary">
-              <div class="idsk-card-meta-container">
-                <span class="idsk-card-meta idsk-card-meta-date"><a href="#" class="govuk-link"
-                    title="Pridané dňa: 1.7.2020">1.7.2020</a></span> <span class="idsk-card-meta idsk-card-meta-tag"><a
-                    href="#" class="govuk-link" title="Tag 1">Tag 1</a></span><span
-                  class="idsk-card-meta idsk-card-meta-tag"><a href="#" class="govuk-link" title="Tag 2">Tag
-                    2</a></span>
-              </div>
-
-
-              <div class="idsk-heading idsk-heading-secondary">
-                <a href="/clanok" class="idsk-card-title govuk-link"
-                  title="Podpora najmenej rozvinutých okresov: Nové výzvy po novom!">Článok 4</a>
-              </div>
-
-              <p class="idsk-body idsk-body-secondary">
-                Lorem ipsum dolor sit amet, consenctetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et
-                dolore magna aliqua.
-              </p>
-
-
-
-            </div>
-          </div>
-
-        </div>
+          {% endfor %}
       </div>
 
       <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
-      <h2 class="govuk-heading-l">Dôležité odkazy</h2>
-      <div class="govuk-body-m"></div>
-      <div class="govuk-grid-row">
-        <div class="govuk-grid-row no govuk-!-padding-top-0 govuk-!-padding-bottom-0 row-with-boxes">
-          <!-- Oznámenia obce -->
-          <div class="govuk-grid-column-one-quarter card">
-            <a href="#"
-              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-              <div>
-                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                  <i class="fas fa-bullhorn"></i>
-                </span>
-                <p class="govuk-body">
-                  <strong>Oznámenia obce</strong>
-                </p>
-              </div>
-            </a>
-          </div>
-          <!-- Kultúrne podujatia -->
-          <div class="govuk-grid-column-one-quarter card">
-            <a href="#"
-              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-              <div>
-                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                  <i class="fas fa-theater-masks"></i>
-                </span>
-                <p class="govuk-body">
-                  <strong>Kultúrne podujatia</strong>
-                </p>
-              </div>
-            </a>
-          </div>
-          <!-- Zápisnice z rokovaní -->
-          <div class="govuk-grid-column-one-quarter card">
-            <a href="#"
-              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-              <div>
-                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                  <i class="fas fa-clipboard-list"></i>
-                </span>
-                <p class="govuk-body">
-                  <strong>Zápisnice z rokovaní</strong>
-                </p>
-              </div>
-            </a>
-          </div>
-          <!-- Mapa obce -->
-          <div class="govuk-grid-column-one-quarter card">
-            <a href="#"
-              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-              <div>
-                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                  <i class="fas fa-map-marker-alt"></i>
-                </span>
-                <p class="govuk-body">
-                  <strong>Mapa obce</strong>
-                </p>
-              </div>
-            </a>
-          </div>
-          <!-- Školy a škôlky -->
-          <div class="govuk-grid-column-one-quarter card">
-            <a href="#"
-              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-              <div>
-                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                  <i class="fas fa-school"></i>
-                </span>
-                <p class="govuk-body">
-                  <strong>Školy a škôlky</strong>
-                </p>
-              </div>
-            </a>
-          </div>
-          <!-- Obecné dokumenty -->
-          <div class="govuk-grid-column-one-quarter card">
-            <a href="#"
-              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-              <div>
-                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                  <i class="fas fa-folder-open"></i>
-                </span>
-                <p class="govuk-body">
-                  <strong>Obecné dokumenty</strong>
-                </p>
-              </div>
-            </a>
-          </div>
-          <!-- Kontaktné informácie -->
-          <div class="govuk-grid-column-one-quarter card">
-            <a href="#"
-              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-              <div>
-                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                  <i class="fas fa-phone-alt"></i>
-                </span>
-                <p class="govuk-body">
-                  <strong>Kontaktné informácie</strong>
-                </p>
-              </div>
-            </a>
-          </div>
-          <!-- Plány a projekty -->
-          <div class="govuk-grid-column-one-quarter card">
-            <a href="#"
-              class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-              <div>
-                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                  <i class="fas fa-chart-line"></i>
-                </span>
-                <p class="govuk-body">
-                  <strong>Plány a projekty</strong>
-                </p>
-              </div>
-            </a>
-          </div>
-        </div>
-      </div>
-
-
-      <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
+      
 
       <div class="govuk-grid-row">
         <div class="govuk-grid-column-full govuk-!-margin-bottom-5">

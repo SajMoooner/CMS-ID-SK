@@ -128,47 +128,52 @@
 
                         </div>
                         <div class="govuk-grid-column-full">
+                            <!-- Navigation block -->
                             <nav class="">
-                                <ul class="idsk-header-web__nav-list " aria-label="Hlavná navigácia">
+                                <!-- Unordered list to hold the navigation items -->
+                                <ul class="idsk-header-web__nav-list" aria-label="Hlavná navigácia">
+                                    <!-- Loop through each category passed from the context -->
+                                    {% for category in categories %}
                                     <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
-                                            title="Eurofondy">
-                                            Domov
+                                        <!-- Check if the current category has subcategories -->
+                                        {% if category.subcategories.all %}
+                                        <!-- This link acts as a dropdown trigger for subcategories -->
+                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="#"
+                                            title="{{ category.name }}" aria-label="Rozbaliť {{ category.name }} menu"
+                                            aria-expanded="false" data-text-for-hide="Zavrieť {{ category.name }} menu"
+                                            data-text-for-show="Rozbaliť {{ category.name }} menu">
+                                            {{ category.name }}
+                                            <!-- Visual elements for the link indicating a dropdown -->
+                                            <div class="idsk-header-web__link-arrow"></div>
+                                            <div class="idsk-header-web__link-arrow-mobile"></div>
                                         </a>
-                                    </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
-                                            title="Regionálny rozvoj">
-                                            Služby občanom
+                                        <!-- Submenu container for subcategories -->
+                                        <div class="idsk-header-web__nav-submenulite">
+                                            <!-- Unordered list to hold subcategories -->
+                                            <ul class="idsk-header-web__nav-submenulite-list"
+                                                aria-label="{{ category.name }} submenu">
+                                                <!-- Loop through each subcategory of the current category -->
+                                                {% for subcategory in category.subcategories.all %}
+                                                <li class="idsk-header-web__nav-submenulite-list-item">
+                                                    <!-- Link to the subcategory page -->
+                                                    <a class="govuk-link idsk-header-web__nav-submenulite-list-item-link"
+                                                        href="#" title="{{ subcategory.name }}">
+                                                        <span>{{ subcategory.name }}</span>
+                                                    </a>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <!-- If there are no subcategories, just display a regular link -->
+                                        {% else %}
+                                        <a class="govuk-link idsk-header-web__nav-list-item-link"
+                                            href="/kategoria/{{ category.name|slugify }}" title="{{ category.name }}">
+                                            {{ category.name }}
                                         </a>
+                                        {% endif %}
                                     </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
-                                            title="Informatizácia">
-                                            Podnikanie
-                                        </a>
-                                    </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
-                                            title="Investície">
-                                            Vzdelávanie
-                                        </a>
-                                    </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="#5"
-                                            title="Inovácie">
-                                            Kultúra a voľný čas
-                                        </a>
-                                    </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="#5"
-                                            title="Inovácie">
-                                            Mestská rada
-                                        </a>
-                                    </li>
-
+                                    {% endfor %}
                                 </ul>
-
                             </nav>
                         </div>
                     </div>
@@ -186,7 +191,7 @@
                 <li class="govuk-breadcrumbs__list-item">
                     <a class="govuk-breadcrumbs__link" href="/"> Main Page</a>
                 </li>
-                <li class="govuk-breadcrumbs__list-item" aria-current="page">Kategoria</li>
+                <li class="govuk-breadcrumbs__list-item" aria-current="page">{{category_name |capfirst}}</li>
             </ol>
         </div>
 
@@ -196,7 +201,7 @@
                     <div class="govuk-grid-row ">
                         <div class="govuk-grid-column-full govuk-grid-column-two-thirds-from-desktop">
                             <h2 class="govuk-heading-m heading-bigger-margin">
-                                Vitajte v kategórii
+                                Vitajte v kategórii {{category_name |capfirst}}
                             </h2>
                             <p class="govuk-body">Na tejto stránke nájdete informácie týkajúce sa rôznych oblastí života
                                 v našej obci. Vyberte si kategóriu, ktorá vás zaujíma a získajte všetky potrebné

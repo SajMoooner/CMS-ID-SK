@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-_q%=4iqt!#e+5eklm#ua6o*9*s&v!^8ha@#4&_nwrsy$smlnk_
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['www.mesto.slovakosoft.sk','mesto.slovakosoft.sk']
+ALLOWED_HOSTS = ['www.mesto.slovakosoft.sk','mesto.slovakosoft.sk','*']
 
 
 # Application definition
@@ -43,6 +43,7 @@ INSTALLED_APPS = [
     'ArticlePage',
     'LoginPage',
     'AdminPage',
+    'widget_tweaks',
 ]
 
 MIDDLEWARE = [
@@ -116,6 +117,12 @@ TIME_ZONE = 'UTC'
 USE_I18N = True
 
 USE_TZ = True
+
+# Cesta k médiím
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
+
+
 
 
 # Static files (CSS, JavaScript, Images)

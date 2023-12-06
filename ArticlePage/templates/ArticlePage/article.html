@@ -129,44 +129,49 @@
                         </div>
                         <div class="govuk-grid-column-full">
                             <nav class="">
-                                <ul class="idsk-header-web__nav-list " aria-label="Hlavná navigácia">
+                                <!-- Unordered list to hold the navigation items -->
+                                <ul class="idsk-header-web__nav-list" aria-label="Hlavná navigácia">
+                                    <!-- Loop through each category passed from the context -->
+                                    {% for category in categories %}
                                     <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
-                                            title="Eurofondy">
-                                            Domov
+                                        <!-- Check if the current category has subcategories -->
+                                        {% if category.subcategories.all %}
+                                        <!-- This link acts as a dropdown trigger for subcategories -->
+                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="#"
+                                            title="{{ category.name }}" aria-label="Rozbaliť {{ category.name }} menu"
+                                            aria-expanded="false" data-text-for-hide="Zavrieť {{ category.name }} menu"
+                                            data-text-for-show="Rozbaliť {{ category.name }} menu">
+                                            {{ category.name }}
+                                            <!-- Visual elements for the link indicating a dropdown -->
+                                            <div class="idsk-header-web__link-arrow"></div>
+                                            <div class="idsk-header-web__link-arrow-mobile"></div>
                                         </a>
-                                    </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
-                                            title="Regionálny rozvoj">
-                                            Služby občanom
+                                        <!-- Submenu container for subcategories -->
+                                        <div class="idsk-header-web__nav-submenulite">
+                                            <!-- Unordered list to hold subcategories -->
+                                            <ul class="idsk-header-web__nav-submenulite-list"
+                                                aria-label="{{ category.name }} submenu">
+                                                <!-- Loop through each subcategory of the current category -->
+                                                {% for subcategory in category.subcategories.all %}
+                                                <li class="idsk-header-web__nav-submenulite-list-item">
+                                                    <!-- Link to the subcategory page -->
+                                                    <a class="govuk-link idsk-header-web__nav-submenulite-list-item-link"
+                                                        href="#" title="{{ subcategory.name }}">
+                                                        <span>{{ subcategory.name }}</span>
+                                                    </a>
+                                                </li>
+                                                {% endfor %}
+                                            </ul>
+                                        </div>
+                                        <!-- If there are no subcategories, just display a regular link -->
+                                        {% else %}
+                                        <a class="govuk-link idsk-header-web__nav-list-item-link"
+                                            href="/kategoria/{{ category.name|slugify }}" title="{{ category.name }}">
+                                            {{ category.name }}
                                         </a>
+                                        {% endif %}
                                     </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
-                                            title="Informatizácia">
-                                            Podnikanie
-                                        </a>
-                                    </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="/kategoria"
-                                            title="Investície">
-                                            Vzdelávanie
-                                        </a>
-                                    </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="#5"
-                                            title="Inovácie">
-                                            Kultúra a voľný čas
-                                        </a>
-                                    </li>
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="#5"
-                                            title="Inovácie">
-                                            Mestská rada
-                                        </a>
-                                    </li>
-
+                                    {% endfor %}
                                 </ul>
                             </nav>
                         </div>
@@ -185,8 +190,7 @@
                 <li class="govuk-breadcrumbs__list-item">
                     <a class="govuk-breadcrumbs__link" href="/">Main Page</a>
                 </li>
-                <li class="govuk-breadcrumbs__list-item" aria-current="page">Služby občanom</li>
-                <li class="govuk-breadcrumbs__list-item" aria-current="page">Článok</li>
+                <li class="govuk-breadcrumbs__list-item" aria-current="page">{{article.category}}</li>
             </ol>
         </div>
 
@@ -194,10 +198,12 @@
             <div class="govuk-grid-row" id="idsk-article-pattern">
                 <div class="govuk-grid-column-three-quarters-from-desktop idsk-article-pattern__element-right">
                     <div id="uvod">
+                        <span class="govuk-caption-xl idsk-article-pattern__subtitle">{{article.department}}</span>
                         <span class="govuk-caption-xl idsk-article-pattern__subtitle"></span>
-                        <h2 class="govuk-heading-l idsk-stepper-pattern__intro-heading">Názov článku </h2>
+                        <h2 class="govuk-heading-l idsk-stepper-pattern__intro-heading">{{ article.title }}</h2>
                     </div>
-                    <p class="govuk-body-s idsk-article-pattern__text-silver--down">Aktualizované 8.12.2020
+                    <p class="govuk-body-s idsk-article-pattern__text-silver--down">Vytvorené :
+                        {{article.created_at|date:"d.m.Y"}}
                         <a class="govuk-link" href="#" title="zobraziť aktualizácie">
                         </a>
                     </p>
@@ -212,104 +218,54 @@
                         <ul class="idsk-in-page-navigation__list">
                             <li class="idsk-in-page-navigation__list-item idsk-in-page-navigation__list-item--active">
                                 <a class="idsk-in-page-navigation__link" href="#uvod">
-                                    <span class="idsk-in-page-navigation__link-number">1.</span> <span
-                                        class="idsk-in-page-navigation__link-title">Úvod</span>
+                                    <span class="idsk-in-page-navigation__link-number">1.</span>
+                                    <span class="idsk-in-page-navigation__link-title">Úvod</span>
                                 </a>
                             </li>
+                            {% for subtitle in article.subtitles.all %}
                             <li class="idsk-in-page-navigation__list-item">
-                                <a class="idsk-in-page-navigation__link" href="#nadpis-1">
-                                    <span class="idsk-in-page-navigation__link-number">2.</span> <span
-                                        class="idsk-in-page-navigation__link-title">Počet subjektov aktuálne</span>
+                                <a class="idsk-in-page-navigation__link" href="#nadpis-{{ forloop.counter }}">
+                                    <span class="idsk-in-page-navigation__link-number">{{ forloop.counter0 }}</span>
+                                    <span class="idsk-in-page-navigation__link-title">{{ subtitle.title }}</span>
                                 </a>
                             </li>
-                            <li class="idsk-in-page-navigation__list-item">
-                                <a class="idsk-in-page-navigation__link" href="#nadpis-2">
-                                    <span class="idsk-in-page-navigation__link-number">3.</span> <span
-                                        class="idsk-in-page-navigation__link-title">Odklad povinnej aktivácie</span>
+                            {% endfor %}
+
+                            {% with total_subtitles=article.subtitles.all.count %}
+                            {% for _ in "x"|rjust:"4"|slice:":4"|make_list %}
+                            {% if forloop.counter0 >= total_subtitles %}
+                            <li class="idsk-in-page-navigation__list-item" style="visibility: hidden;">
+                                <a class="idsk-in-page-navigation__link" href="#">
+                                    <span class="idsk-in-page-navigation__link-number">{{
+                                        total_subtitles|add:forloop.counter }}</span>
+                                    <span class="idsk-in-page-navigation__link-title">Placeholder</span>
                                 </a>
                             </li>
-                            <li class="idsk-in-page-navigation__list-item">
-                                <a class="idsk-in-page-navigation__link" href="#zivotne-situacie">
-                                    <span class="idsk-in-page-navigation__link-number">4.</span> <span
-                                        class="idsk-in-page-navigation__link-title">Taktiež súčasťou životných
-                                        situácii</span>
-                                </a>
-                            </li>
+                            {% endif %}
+                            {% endfor %}
+                            {% endwith %}
+
+
+
+
                         </ul>
                     </div>
                 </div>
 
                 <div class="govuk-grid-column-three-quarters-from-desktop">
-                    <p class="govuk-body">Štát v súčasnosti eviduje približne 3 200 subjektov zapísaných v Registri
-                        poľovníckych organizácií vedenom na Ministerstve pôdohospodárstva a rozvoja vidieka SR. V
-                        Registri cirkví a náboženských spoločností štát eviduje do 20 právnických osôb. Štatutári by si
-                        mali skontrolovať údaje, ktoré štátu odovzdali pri zápise ich organizácie do registra a overiť,
-                        že v nich majú uvedené svoje rodné číslo. V prípade poľovníkov vedie register Národné lesnícke
-                        centrum, v prípade cirkví je to Ministerstvo kultúry SR.</p>
-                    <p class="govuk-body">Počet elektronických schránok subjektov neziskového mimovládneho sektora
-                        aktivovaných na doručovanie úradných rozhodnutí sa tak od 1. augusta zvýši približne zo 63-tisíc
-                        na skoro 67-tisíc. Aktiváciu elektronickej schránky na doručovanie NASES zrealizuje automaticky
-                        bez toho, aby sa štatutár do svojej e-schránky prihlásil.</p>
-                    <p class="govuk-body">„Znamená to, že do takto aktivovaných elektronických schránok sú zo strany
-                        úradov doručované úradné rozhodnutia. Štatutári alebo nimi poverené osoby už nechodia so žltým
-                        lístkom na poštu, ale rozhodnutia im štát doručuje do úradných e-schránok zriadených na
-                        slovensko.sk. Rovnako platí, že tieto organizácie nemusia úradné podania realizovať listinne na
-                        pošte, ale majú možnosť tak robiť prostredníctvom svojej elektronickej schránky,“ vysvetľuje
-                        Peter Kucer z MIRRI SR.</p>
-                    <img src="{% static 'MainPage/assets/images/image-placeholder.jpg'%}" alt="Obrazok clanok">
-                    <h3 class="govuk-heading-m govuk-!-margin-top-6" id="nadpis-1">Počet subjektov aktuálne</h3>
-                    <p class="govuk-body">Povinnú aktiváciu elektronických schránok právnických osôb, ktoré odvodzujú
-                        právnu subjektivitu od právnej subjektivity cirkví a náboženských spoločností, štát nateraz
-                        odkladá. Možná je však dobrovoľná aktivácia elektronických schránok pre tieto tipy právnických
-                        osôb, a to formou listinnej žiadosti zaslanej zo strany štatutára do NASES.</p>
-                    <p class="govuk-body">Peter Kucer hovorí, že štatutári sú si vedomí zodpovednosti a ich záujem
-                        postupne rastie: „Ku koncu júna prišlo do elektronických schránok neziskových organizácií,
-                        nadácií, fondov, záujmových či občianskych združení 5 420 úradných rozhodnutí. Chcel by som
-                        preto vyzvať aj poľovníkov a cirkvi, keďže oni so štátom komunikujú pomerne často, aby situáciu
-                        nepodcenili a počítali s tým, že do schránky im budú doručované úradné rozhodnutia.“</p>
-                    <p class="govuk-body">Národná agentúra pre sieťové a elektronické služby (NASES) aktivuje na
-                        doručovanie úradných rozhodnutí e-schránky ďalších organizácií mimovládneho neziskového sektora
-                        postupne v jednotlivých fázach podľa indikatívneho harmonogramu.</p>
-                    <p class="govuk-body">Štatutári nájdu potrebné informácie o elektronických schránkach a prístupe k
-                        nim na statutar.sk. Komplexné informácie aj na slovensko.sk.</p>
-                    <h3 class="govuk-heading-m" id="nadpis-2">Odklad povinnej aktivácie</h3>
-                    <p class="govuk-body">„Na prístup do elektronickej schránky je potrebné mať občiansky preukaz s
-                        čipom a bezpečnostný osobný kód – BOK“, pripomína Peter Kucer, poverený riadením sekcie ITVS
-                        Ministerstva investícií, regionálneho rozvoja a informatizácie SR (MIRRI) a dodáva, že do
-                        elektronickej schránky zriadenej na slovensko.sk sa dostane iba ten štatutár, ktorý má v
-                        príslušnom zdrojovom registri správne uvedené údaje v podobe IČO organizácie a meno, priezvisko
-                        a rodné číslo štatutára.</p>
-                    <p class="govuk-body">Štát v súčasnosti eviduje približne 3 200 subjektov zapísaných v Registri
-                        poľovníckych organizácií vedenom na Ministerstve pôdohospodárstva a rozvoja vidieka SR. V
-                        Registri cirkví a náboženských spoločností štát eviduje do 20 právnických osôb. Štatutári by si
-                        mali skontrolovať údaje, ktoré štátu odovzdali pri zápise ich organizácie do registra a overiť,
-                        že v nich majú uvedené svoje rodné číslo. V prípade poľovníkov vedie register Národné lesnícke
-                        centrum, v prípade cirkví je to Ministerstvo kultúry SR.</p>
-                    <p class="govuk-body">Počet elektronických schránok subjektov neziskového mimovládneho sektora
-                        aktivovaných na doručovanie úradných rozhodnutí sa tak od 1. augusta zvýši približne zo 63-tisíc
-                        na skoro 67-tisíc. Aktiváciu elektronickej schránky na doručovanie NASES zrealizuje automaticky,
-                        bez toho, aby sa štatutár do svojej e-schránky prihlásil.</p>
-                    <p class="govuk-body">„Znamená to, že do takto aktivovaných elektronických schránok sú zo strany
-                        úradov doručované úradné rozhodnutia. Štatutári alebo nimi poverené osoby už nechodia so žltým
-                        lístkom na poštu, ale rozhodnutia im štát doručuje do úradných e-schránok zriadených na
-                        slovensko.sk. Rovnako platí, že tieto organizácie nemusia úradné podania realizovať listinne na
-                        pošte, ale majú možnosť tak robiť prostredníctvom svojej elektronickej schránky“, vysvetľuje
-                        Peter Kucer z MIRRI.</p>
-                    <p class="govuk-body">Povinnú aktiváciu elektronických schránok právnických osôb, ktoré odvodzujú
-                        právnu subjektivitu od právnej subjektivity cirkví a náboženských spoločností štát nateraz
-                        odkladá. Možná je však dobrovoľná aktivácia elektronických schránok pre tieto tipy právnických
-                        osôb, a to formou listinnej žiadosti zaslanej zo strany štatutára do NASES.</p>
-                    <p class="govuk-body">Peter Kucer hovorí, že štatutári sú si vedomí zodpovednosti a ich záujem
-                        postupne rastie: „Ku koncu júna prišlo do elektronických schránok neziskových organizácií,
-                        nadácií, fondov, záujmových či občianskych združení 5 420 úradných rozhodnutí. Chcel by som
-                        preto vyzvať aj poľovníkov a cirkvi, keďže oni so štátom komunikujú pomerne často, aby situáciu
-                        nepodcenili a počítali s tým, že do schránky im budú doručované úradné rozhodnutia“.</p>
-                    <p class="govuk-body">Národná agentúra pre sieťové a elektronické služby (NASES) aktivuje na
-                        doručovanie úradných rozhodnutí e-schránky ďalších organizácií mimovládneho neziskového sektora
-                        postupne v jednotlivých fázach podľa indikatívneho harmonogramu.</p>
-                    <p class="govuk-body">Štatutári nájdu potrebné informácie o elektronických schránkach a prístupe k
-                        nim na statutar.sk. Komplexné informácie aj na slovensko.sk.</p>
-                    <p class="govuk-body-s idsk-article-pattern__text-silver--up">Aktualizované 8.12.2020
+                    <p class="govuk-body">
+                        {{ article.content|linebreaksbr }}</p>
+                    <img src="{{ article.image.url }}" alt="Obrazok clanok">
+
+                   {% for subtitle in article.subtitles.all %}
+                        <h3 class="govuk-heading-m govuk-!-margin-top-6" id="nadpis-{{ forloop.counter }}">{{ subtitle.title }}</h3>
+                        <p class="govuk-body">{{ subtitle.text }}</p>
+                        {% if subtitle.image %}
+                            <img src="{{ subtitle.image.url }}" alt="Obrázok podčlánku {{ subtitle.title }}">
+                        {% endif %}
+                    {% endfor %}
+
+                    <p class="govuk-body-s idsk-article-pattern__text-silver--up">Aktualizované
                         <a class="govuk-link" id="idsk-article__content__button" href="#"
                             title="+ zobraziť aktualizácie" onclick="showNews(); return false"
                             data-opened="- schovať aktualizácie" data-closed="+ zobraziť aktualizácie">
@@ -357,9 +313,28 @@
         </main>
     </div>
 
+
     <div data-module="idsk-footer-extended">
         <footer class="idsk-footer-extended  ">
+            <div class="idsk-footer-extended-up-button-div" id="footer-extended-up-button" style="display: block;">
+                <div class="govuk-width-container">
+                    <div class="govuk-grid-column-full">
+                        <a href="#" title="Späť na vrch stránky" role="button" draggable="false"
+                            class="idsk-button idsk-button--start idsk-footer-extended-up-button-a"
+                            data-module="idsk-button">
+                            <svg class="idsk-footer-extended__up-button-svg" width="20" height="15" viewBox="0 0 20 15"
+                                fill="none" xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M10 5.5984L0 15L0 9.40174L10 0L10 5.5984Z" fill="white"></path>
+                                <path opacity="0.5" fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 9.4016L10 0V5.59826L20 15V9.4016Z" fill="white"></path>
+                            </svg>
+                            Hore </a>
+                    </div>
+                </div>
+            </div>
             <div class="idsk-footer-extended-main-content">
+
                 <div class="govuk-width-container">
                     <div class="govuk-grid-column-full">
                         <div class="idsk-footer-extended-description-panel">

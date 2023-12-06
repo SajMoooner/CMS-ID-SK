@@ -1,0 +1,317 @@
+<!DOCTYPE html>
+<html lang="sk" class="govuk-template app-no-canvas-background">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Administrácia</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {% load static %}
+    {% load widget_tweaks %}
+    <link rel="stylesheet" href="{% static 'MainPage/idsk-frontend-2.11.0.min.css'%}">
+    <link rel="stylesheet" href="{% static 'AdminPage/style.css'%}">
+    <script src="{% static 'MainPage/idsk-frontend.min.js'%}"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+</head>
+
+<body class="govuk-template__body ">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+
+
+    <header class="idsk-header-web " data-module="idsk-header-web">
+        <div class="idsk-header-web__scrolling-wrapper">
+            <!-- Warning Banner Starts Here -->
+            <div class="idsk-header-web__banner idsk-header-web__banner--warning">
+                <div class="govuk-width-container">
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-full">
+                            <div class="govuk-body-s idsk-header-web__banner-title">
+                                <div class="idsk-header-web__warning-icon"></div>
+                                Upozornenie: Nachádzate sa v administratívnej časti. Prístup do tejto časti je obmedzený
+                                a vyhradený iba oprávneným osobám. Akýkoľvek neoprávnený prístup alebo pokus o
+                                modifikáciu obsahu je trestný a bude stíhaný v súlade so zákonom č. 215/2022 Z. z. o
+                                kybernetickej bezpečnosti a ochrane osobných údajov v digitálnom priestore.
+                            </div>
+                            <button class="idsk-header-web__banner-close" aria-label="Zavrieť banner"><span
+                                    class="idsk-header-web__menu-close"></span></button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <!-- Warning Banner Ends Here -->
+
+            <div class="idsk-header-web__tricolor"></div>
+
+            <div class="idsk-header-web__brand ">
+                <div class="govuk-width-container">
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-full">
+                            <div class="idsk-header-web__brand-gestor">
+                                <span class="govuk-body-s idsk-header-web__brand-gestor-text">
+                                    Testovacia stránka verejnej správy
+
+                                </span>
+                                <span class="govuk-body-s idsk-header-web__brand-gestor-text--mobile">
+                                    SK
+
+                                </span>
+
+                            </div>
+                            <div class="idsk-header-web__brand-spacer"></div>
+                            <div class="idsk-header-web__brand-language">
+                                <button class="idsk-header-web__brand-language-button"
+                                    aria-label="Rozbaliť jazykové menu" aria-expanded="false"
+                                    data-text-for-hide="Skryť jazykové menu"
+                                    data-text-for-show="Rozbaliť jazykové menu">
+                                    Slovenčina
+                                    <span class="idsk-header-web__link-arrow"></span>
+                                </button>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="idsk-header-web__main">
+                <div class="govuk-width-container">
+                    <div class="govuk-grid-row">
+                        <div class="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
+                            <div class="idsk-header-web__main-headline">
+                                <a href="/" title="Odkaz na úvodnú stránku">
+                                    <img src="{% static 'MainPage/assets/images/header-web/logo-placeholder.png'%}"
+                                        alt="ID-SK Frontend" class="idsk-header-web__main-headline-logo">
+                                    <span class="govuk-heading-m">
+                                        Portál pre administráciu
+                                    </span>
+                                </a>
+
+                                <button class="idsk-button idsk-header-web__main-headline-menu-button"
+                                    aria-label="Rozbaliť menu" aria-expanded="false" data-text-for-show="Rozbaliť menu"
+                                    data-text-for-hide="Zavrieť menu">
+                                    Menu
+                                    <span class="idsk-header-web__menu-open"></span>
+                                    <span class="idsk-header-web__menu-close"></span>
+                                </button>
+                            </div>
+                        </div>
+
+                        <div class="govuk-grid-column-two-thirds">
+                            <div class="idsk-header-web__main-action">
+                                <form class="idsk-header-web__main-action-search">
+                                    <input class="govuk-input govuk-!-display-inline-block"
+                                        id="idsk-header-web__main-action-search-input" name="search"
+                                        placeholder="Zadajte hľadaný výraz" title="Zadajte hľadaný výraz" type="search"
+                                        aria-label="Zadajte hľadaný výraz" />
+                                    <button type="submit" class="govuk-button" data-module="govuk-button">
+                                        <span class="govuk-visually-hidden">Vyhľadať</span>
+                                        <i aria-hidden="true" class="fas fa-search"></i>
+                                    </button>
+
+                                </form>
+
+                                <div class="idsk-header-web__main--buttons">
+                                </div>
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </header>
+
+
+    <div class="govuk-width-container">
+        <div class="govuk-breadcrumbs">
+            <ol class="govuk-breadcrumbs__list">
+                <li class="govuk-breadcrumbs__list-item">
+                    <a class="govuk-breadcrumbs__link" href="/uvod">Admin</a>
+                </li>
+                <li class="govuk-breadcrumbs__list-item" aria-current="page">Všetky články</li>
+            </ol>
+        </div>
+
+        <div class="govuk-width-container">
+            <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content">
+                <h1 class="govuk-heading-l">Všetky články </h1>
+              
+
+                <!-- Filtrovací formulář podla GOV.UK -->
+                <form method="get" action="{% url 'articleAdmin' %}" class="govuk-form-group">
+                    <div class="govuk-grid-row">
+                   <div class="govuk-grid-column-one-third">
+        <div class="govuk-form-group">
+          <label for="category" class="govuk-label">Kategória:</label>
+          <select name="category" id="category" class="govuk-select">
+            <option value="">Všetky</option>
+            {% for category in categories %}
+              <option value="{{ category.id }}">{{ category.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <!-- Filtrování podle cílového publika -->
+      <div class="govuk-grid-column-one-third">
+        <div class="govuk-form-group">
+          <label for="target_audience" class="govuk-label">Cieľové publikum:</label>
+          <select name="target_audience" id="target_audience" class="govuk-select">
+            <option value="">Všetky</option>
+            {% for audience in target_audiences %}
+              <option value="{{ audience.id }}">{{ audience.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+
+      <!-- Filtrování podle oddelení -->
+      <div class="govuk-grid-column-one-third">
+        <div class="govuk-form-group">
+          <label for="department" class="govuk-label">Oddelenie:</label>
+          <select name="department" id="department" class="govuk-select">
+            <option value="">Všetky</option>
+            {% for department in departments %}
+              <option value="{{ department.id }}">{{ department.name }}</option>
+            {% endfor %}
+          </select>
+        </div>
+      </div>
+    </div>
+</div>
+<div class="govuk-form-group">
+<input type="submit" value="Filtrovať" class="govuk-button">
+</div>
+                </form>
+
+                <!-- Tabulka článků podla GOV.UK -->
+                <table class="govuk-table">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header">Názov</th>
+                            <th class="govuk-table__header">Kategória</th>
+                            <th class="govuk-table__header">Cieľové publikum</th>
+                            <th class="govuk-table__header">Oddelenie</th>
+                            <th class="govuk-table__header">Vytvorené</th>
+                            <th class="govuk-table__header">Akcia</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                        {% for article in articles %}
+                        <tr class="govuk-table__row">
+                            <td class="govuk-table__cell">{{ article.title }}</td>
+                            <td class="govuk-table__cell">{{ article.category }}</td>
+                            <td class="govuk-table__cell">{{ article.target_audience }}</td>
+                            <td class="govuk-table__cell">{{ article.department }}</td>
+                            <td class="govuk-table__cell">{{ article.created_at|date:"d.m.Y H:i" }}</td>
+                            <td class="govuk-table__cell">
+                                <a href="/clanok/{{ article.id }}"
+                                    class="govuk-button govuk-button--secondary">Zobrazit</a>
+                            </td>
+                        </tr>
+                        {% endfor %}
+                    </tbody>
+                </table>
+
+            </main>
+        </div>
+    </div>
+
+
+    <div data-module="idsk-footer-extended">
+        <footer class="idsk-footer-extended  ">
+            <div class="idsk-footer-extended-main-content">
+                <div class="govuk-width-container">
+                    <div class="govuk-grid-column-full">
+                        <div class="idsk-footer-extended-description-panel">
+                            <div class="idsk-footer-extended-meta-item">
+                                <ul class="idsk-footer-extended-inline-list ">
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Pomoc" href="#">
+                                            Pomoc
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Cookies" href="#">
+                                            Cookies
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Kontakty" href="#">
+                                            Kontakty
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Mapa Stránky" href="#">
+                                            Mapa Stránky
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="RSS" href="#">
+                                            RSS
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Vyhlásenie o prístupnosti" href="#">
+                                            Vyhlásenie o prístupnosti
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="govuk-grid-column-two-thirds idsk-footer-extended-info-links">
+                                <p class="idsk-footer-extended-frame">Vytvorené v súlade s
+                                    <a class="govuk-link" title="Jednotným dizajn manuálom elektronických služieb."
+                                        href="#">
+                                        Jednotným dizajn manuálom elektronických služieb.
+                                    </a>
+                                </p>
+
+                            </div>
+                            <div class="govuk-grid-column-one-third idsk-footer-extended-logo-box">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>window.GOVUKFrontend.initAll()</script>
+    <script>
+        let indexPodnadpisu = 0;
+
+        // Funkce pro přidání podnadpisu
+        document.getElementById('pridat-podnadpis').addEventListener('click', function () {
+            let podnadpisy = document.querySelectorAll('#podnadpisy-container .podnadpis-form');
+            if (indexPodnadpisu < podnadpisy.length) {
+                podnadpisy[indexPodnadpisu].style.display = 'block';
+                indexPodnadpisu++;
+            }
+        });
+
+        // Funkce pro odstranění podnadpisu
+        document.querySelectorAll('.remove-podnadpis').forEach(function (button) {
+            button.addEventListener('click', function () {
+                let index = button.getAttribute('data-index');
+                let podnadpisToRemove = document.querySelectorAll('#podnadpisy-container .podnadpis-form')[index];
+                podnadpisToRemove.style.display = 'none';
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

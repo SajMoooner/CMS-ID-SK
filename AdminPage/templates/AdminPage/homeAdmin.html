@@ -83,7 +83,7 @@
                     <div class="govuk-grid-row">
                         <div class="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
                             <div class="idsk-header-web__main-headline">
-                                <a href="/" title="Odkaz na úvodnú stránku">
+                                <a href="/uvod" title="Odkaz na úvodnú stránku">
                                     <img src="{% static 'MainPage/assets/images/header-web/logo-placeholder.png'%}"
                                         alt="ID-SK Frontend" class="idsk-header-web__main-headline-logo">
                                     <span class="govuk-heading-m">
@@ -196,7 +196,7 @@
 
                     <!-- Pridať článok -->
                     <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
+                        <a href="/uvod/pridanieClanku/"
                             class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
                             <div>
                                 <span class="govuk-heading-l govuk-!-margin-bottom-2">
@@ -211,7 +211,7 @@
 
                     <!-- Upravit článok -->
                     <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
+                        <a href="/uvod/upravaClanku"
                             class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
                             <div>
                                 <span class="govuk-heading-l govuk-!-margin-bottom-2">
@@ -226,7 +226,7 @@
 
                     <!-- Odstrániť článok -->
                     <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
+                        <a href="/uvod/odstranenieClanku"
                             class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
                             <div>
                                 <span class="govuk-heading-l govuk-!-margin-bottom-2">
@@ -239,16 +239,75 @@
                         </a>
                     </div>
 
-                    <!-- Aktuality -->
+                    <!-- Prehľad článkov -->
                     <div class="govuk-grid-column-one-quarter card">
+                        <a href="/uvod/vsetkyClanky"
+                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+                            <div>
+                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                                    <i class="far fa-newspaper"></i>
+                                </span>
+                                <p class="govuk-body">
+                                    <strong>Prehľad článkov</strong>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                </div>
+
+            
+
+            </div>
+
+            <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
+
+
+            <h2 class="govuk-heading-l">Správa kategorií</h2>
+            <div class="govuk-body-m"></div>
+            <div class="govuk-grid-row">
+                <div class="govuk-grid-row no govuk-!-padding-top-0 govuk-!-padding-bottom-0 row-with-boxes">
+
+                    <!-- Kategórie -->
+                    <div class="govuk-grid-column-one-third card">
+                        <a href="/uvod/kategoriaAdmin"
+                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+                            <div>
+                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                                    <i class="fas fa-layer-group"></i>
+                                </span>
+                                <p class="govuk-body">
+                                    <strong>Kategórie</strong>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Stránka kategórií -->
+                    <div class="govuk-grid-column-one-third card">
                         <a href="#"
                             class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
                             <div>
                                 <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                                    <i class="fas fa-newspaper"></i>
+                                    <i class="fas fa-list-ul"></i>
                                 </span>
                                 <p class="govuk-body">
-                                    <strong>Aktuality</strong>
+                                    <strong>Stránka kategórií</strong>
+                                </p>
+                            </div>
+                        </a>
+                    </div>
+
+                    <!-- Podkategórie -->
+                    <div class="govuk-grid-column-one-third card">
+                        <a href="#"
+                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
+                            <div>
+                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
+                                    <i class="fas fa-stream"></i>
+                                </span>
+                                <p class="govuk-body">
+                                    <strong>Podkategórie</strong>
                                 </p>
                             </div>
                         </a>
@@ -256,7 +315,6 @@
 
                 </div>
             </div>
-
 
 
             <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
