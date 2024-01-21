@@ -88,7 +88,7 @@
                     <div class="govuk-grid-row">
                         <div class="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
                             <div class="idsk-header-web__main-headline">
-                                <a href="/" title="Odkaz na úvodnú stránku">
+                                <a href="/uvod" title="Odkaz na úvodnú stránku">
                                     <img src="{% static 'MainPage/assets/images/header-web/logo-placeholder.png'%}"
                                         alt="ID-SK Frontend" class="idsk-header-web__main-headline-logo">
                                     <span class="govuk-heading-m">
@@ -214,7 +214,12 @@
                                 <label class="govuk-label" for="main_message">Čo článkom chceme povedať:</label>
                                 <input class="govuk-input" type="text" id="main_message" name="main_message" value="{{ selected_article.main_message }}">
                             </div>
-                                </div>
+                        </div>
+                        
+                        <div class="govuk-form-group">
+                            <label class="govuk-label" for="department">Oddelenie:</label>
+                            <input class="govuk-input" type="text" id="department" value="{{ selected_article.life_situation }}" readonly>
+                        </div>
                              <div class="govuk-form-group">
                                  <label class="govuk-label" for="title">Názov:</label>
                                  <input class="govuk-input" type="text" id="title" name="title" value="{{ selected_article.title }}">

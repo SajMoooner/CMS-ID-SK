@@ -9,6 +9,6 @@ class CategoryAdmin(admin.ModelAdmin):
 
 @admin.register(Subcategory)
 class SubcategoryAdmin(admin.ModelAdmin):
-    list_display = ['name', 'category']
+    list_display = ['name', 'category', 'link']
     list_filter = ['category']
     search_fields = ['name', 'category__name']

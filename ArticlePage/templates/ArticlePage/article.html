@@ -80,11 +80,9 @@
                         <div class="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
                             <div class="idsk-header-web__main-headline">
                                 <a href="/" title="Odkaz na úvodnú stránku">
-                                    <img src="{% static 'MainPage/assets/images/header-web/logo-placeholder.png'%}"
+                                    <img src="{% static 'MainPage/assets/images/slovenskosk.png'%}"
                                         alt="ID-SK Frontend" class="idsk-header-web__main-headline-logo">
-                                    <span class="govuk-heading-m">
-                                        Webový portál pre verejnú správu
-                                    </span>
+                                    
                                 </a>
 
                                 <button class="idsk-button idsk-header-web__main-headline-menu-button"
@@ -99,21 +97,14 @@
 
                         <div class="govuk-grid-column-two-thirds">
                             <div class="idsk-header-web__main-action">
-                                <form class="idsk-header-web__main-action-search">
-                                    <input class="govuk-input govuk-!-display-inline-block"
-                                        id="idsk-header-web__main-action-search-input" name="search"
-                                        placeholder="Zadajte hľadaný výraz" title="Zadajte hľadaný výraz" type="search"
-                                        aria-label="Zadajte hľadaný výraz" />
-                                    <button type="submit" class="govuk-button" data-module="govuk-button">
-                                        <span class="govuk-visually-hidden">Vyhľadať</span>
-                                        <i aria-hidden="true" class="fas fa-search"></i>
-                                    </button>
-
-                                </form>
-
+                               
                                 <div class="idsk-header-web__main--buttons">
                                 </div>
-
+                                <div class="idsk-header-web__main--buttons">
+                                    <button type="button" class="idsk-button idsk-header-web__main--login-logoutbtn" data-module="idsk-button">
+                                      Elektronické služby
+                                    </button>
+                                  </div>
                             </div>
                         </div>
                     </div>
@@ -128,52 +119,52 @@
 
                         </div>
                         <div class="govuk-grid-column-full">
+                            <!-- Navigation block -->
                             <nav class="">
                                 <!-- Unordered list to hold the navigation items -->
                                 <ul class="idsk-header-web__nav-list" aria-label="Hlavná navigácia">
-                                    <!-- Loop through each category passed from the context -->
-                                    {% for category in categories %}
-                                    <li class="idsk-header-web__nav-list-item">
-                                        <!-- Check if the current category has subcategories -->
-                                        {% if category.subcategories.all %}
-                                        <!-- This link acts as a dropdown trigger for subcategories -->
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link" href="#"
-                                            title="{{ category.name }}" aria-label="Rozbaliť {{ category.name }} menu"
-                                            aria-expanded="false" data-text-for-hide="Zavrieť {{ category.name }} menu"
-                                            data-text-for-show="Rozbaliť {{ category.name }} menu">
-                                            {{ category.name }}
-                                            <!-- Visual elements for the link indicating a dropdown -->
-                                            <div class="idsk-header-web__link-arrow"></div>
-                                            <div class="idsk-header-web__link-arrow-mobile"></div>
-                                        </a>
-                                        <!-- Submenu container for subcategories -->
-                                        <div class="idsk-header-web__nav-submenulite">
-                                            <!-- Unordered list to hold subcategories -->
-                                            <ul class="idsk-header-web__nav-submenulite-list"
-                                                aria-label="{{ category.name }} submenu">
-                                                <!-- Loop through each subcategory of the current category -->
-                                                {% for subcategory in category.subcategories.all %}
-                                                <li class="idsk-header-web__nav-submenulite-list-item">
-                                                    <!-- Link to the subcategory page -->
-                                                    <a class="govuk-link idsk-header-web__nav-submenulite-list-item-link"
-                                                        href="#" title="{{ subcategory.name }}">
-                                                        <span>{{ subcategory.name }}</span>
-                                                    </a>
-                                                </li>
-                                                {% endfor %}
-                                            </ul>
-                                        </div>
-                                        <!-- If there are no subcategories, just display a regular link -->
-                                        {% else %}
-                                        <a class="govuk-link idsk-header-web__nav-list-item-link"
-                                            href="/kategoria/{{ category.name|slugify }}" title="{{ category.name }}">
-                                            {{ category.name }}
-                                        </a>
-                                        {% endif %}
-                                    </li>
-                                    {% endfor %}
+                                  <!-- Loop through each category passed from the context -->
+                                  {% for category in categories %}
+                                  <li class="idsk-header-web__nav-list-item">
+                                    <!-- Check if the current category has subcategories -->
+                                    {% if category.subcategories.all %}
+                                    <!-- This link acts as a dropdown trigger for subcategories -->
+                                    <a class="govuk-link idsk-header-web__nav-list-item-link" href="#" title="{{ category.name }}"
+                                      aria-label="Rozbaliť {{ category.name }} menu" aria-expanded="false"
+                                      data-text-for-hide="Zavrieť {{ category.name }} menu"
+                                      data-text-for-show="Rozbaliť {{ category.name }} menu">
+                                      {{ category.name }}
+                                      <!-- Visual elements for the link indicating a dropdown -->
+                                      <div class="idsk-header-web__link-arrow"></div>
+                                      <div class="idsk-header-web__link-arrow-mobile"></div>
+                                    </a>
+                                    <!-- Submenu container for subcategories -->
+                                    <div class="idsk-header-web__nav-submenulite">
+                                      <!-- Unordered list to hold subcategories -->
+                                      <ul class="idsk-header-web__nav-submenulite-list" aria-label="{{ category.name }} submenu">
+                                        <!-- Loop through each subcategory of the current category -->
+                                        {% for subcategory in category.subcategories.all %}
+                                        <li class="idsk-header-web__nav-submenulite-list-item">
+                                          <!-- Link to the subcategory page -->
+                                          <a class="govuk-link idsk-header-web__nav-submenulite-list-item-link"
+                                            href="{{ subcategory.link }}" title="{{ subcategory.name }}">
+                                            <span>{{ subcategory.name }}</span>
+                                          </a>
+                                        </li>
+                                        {% endfor %}
+                                      </ul>
+                                    </div>
+                                    <!-- If there are no subcategories, just display a regular link -->
+                                    {% else %}
+                                    <a class="govuk-link idsk-header-web__nav-list-item-link"
+                                    href ="/kategoria/kat={{ category.id|slugify }}/zivotna=null/komu=null/oddelenie=null/text=null" title="{{ category.name }}">
+                                      {{ category.name}}
+                                    </a>
+                                    {% endif %}
+                                  </li>
+                                  {% endfor %}
                                 </ul>
-                            </nav>
+                              </nav>
                         </div>
                     </div>
 
@@ -257,12 +248,12 @@
                         {{ article.content|linebreaksbr }}</p>
                     <img src="{{ article.image.url }}" alt="Obrazok clanok">
 
-                   {% for subtitle in article.subtitles.all %}
-                        <h3 class="govuk-heading-m govuk-!-margin-top-6" id="nadpis-{{ forloop.counter }}">{{ subtitle.title }}</h3>
-                        <p class="govuk-body">{{ subtitle.text }}</p>
-                        {% if subtitle.image %}
-                            <img src="{{ subtitle.image.url }}" alt="Obrázok podčlánku {{ subtitle.title }}">
-                        {% endif %}
+                    {% for subtitle in article.subtitles.all %}
+                    <h3 class="govuk-heading-m govuk-!-margin-top-6" id="nadpis-{{ forloop.counter }}">{{ subtitle.title}}</h3>
+                    <p class="govuk-body">{{ subtitle.text }}</p>
+                    {% if subtitle.image %}
+                    <img src="{{ subtitle.image.url }}" alt="Obrázok podčlánku {{ subtitle.title }}">
+                    {% endif %}
                     {% endfor %}
 
                     <p class="govuk-body-s idsk-article-pattern__text-silver--up">Aktualizované

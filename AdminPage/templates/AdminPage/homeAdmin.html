@@ -101,31 +101,46 @@
                             </div>
                         </div>
 
-                        <div class="govuk-grid-column-two-thirds">
+                        <div class="idsk-header__user govuk-grid-column-two-thirds idsk-header__user--end">
                             <div class="idsk-header-web__main-action">
-                                <form class="idsk-header-web__main-action-search">
-                                    <input class="govuk-input govuk-!-display-inline-block"
-                                        id="idsk-header-web__main-action-search-input" name="search"
-                                        placeholder="Zadajte hľadaný výraz" title="Zadajte hľadaný výraz" type="search"
-                                        aria-label="Zadajte hľadaný výraz" />
-                                    <button type="submit" class="govuk-button" data-module="govuk-button">
-                                        <span class="govuk-visually-hidden">Vyhľadať</span>
-                                        <i aria-hidden="true" class="fas fa-search"></i>
-                                    </button>
-
-                                </form>
-
+                                <div class="idsk-header-web__main-action--user">
+                                    
+                                    <div class="idsk-header-web__main--login-action-text">
+                                        <span class="govuk-body-s idsk-header-web__main--login-action-text-user-nam">
+                                            {{ user.get_username }}
+                                        </span>
+                                    </div>
+                                    <div class="idsk-header-web__main-action--user-logout">
+                                        <a href="{% url 'logout' %}" class="idsk-header-web__main-action--user-logout-link">
+                                            Odhlásiť sa
+                                        </a>
+                                    </div>
+                                </div>
+                        
                                 <div class="idsk-header-web__main--buttons">
                                 </div>
-
+                        
                             </div>
                         </div>
+                        
                     </div>
                 </div>
             </div>
 
         </div>
     </header>
+
+    <div class="px-4 py-5 my-5 text-center" style="
+    background-image: url('/static/MainPage/assets/images/admin.jpg?width=3440;height=840');
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    width: 100vw;
+    height: 350px;
+    margin-left: calc(-50vw + 50%);
+    position: relative;
+   ">
+    </div>
 
 
     <div class="govuk-width-container">
@@ -187,8 +202,9 @@
             </div>
 
 
+            {% if is_uradnik or is_superadmin %}
             <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
-
+       
             <h2 class="govuk-heading-l">Správa článkov</h2>
             <div class="govuk-body-m"></div>
             <div class="govuk-grid-row">
@@ -255,17 +271,18 @@
                     </div>
 
                 </div>
+            </div>
+            {% endif %}
 
             
-
-            </div>
-
+            {% if is_spravca or is_superadmin %}
             <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
 
 
             <h2 class="govuk-heading-l">Správa kategorií</h2>
             <div class="govuk-body-m"></div>
             <div class="govuk-grid-row">
+                
                 <div class="govuk-grid-row no govuk-!-padding-top-0 govuk-!-padding-bottom-0 row-with-boxes">
 
                     <!-- Kategórie -->
@@ -283,31 +300,17 @@
                         </a>
                     </div>
 
-                    <!-- Stránka kategórií -->
+                   
+                    <!-- Menu -->
                     <div class="govuk-grid-column-one-third card">
-                        <a href="#"
-                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-                            <div>
-                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                                    <i class="fas fa-list-ul"></i>
-                                </span>
-                                <p class="govuk-body">
-                                    <strong>Stránka kategórií</strong>
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Podkategórie -->
-                    <div class="govuk-grid-column-one-third card">
-                        <a href="#"
+                        <a href="/uvod/menu/"
                             class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
                             <div>
                                 <span class="govuk-heading-l govuk-!-margin-bottom-2">
                                     <i class="fas fa-stream"></i>
                                 </span>
                                 <p class="govuk-body">
-                                    <strong>Podkategórie</strong>
+                                    <strong>Menu</strong>
                                 </p>
                             </div>
                         </a>
@@ -315,10 +318,11 @@
 
                 </div>
             </div>
-
-
+            {% endif %}
+          
+            {% if is_fakturant or is_superadmin %}
             <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
-
+          
             <h2 class="govuk-heading-l">Správa dokumentov</h2>
             <div class="govuk-body-m"></div>
             <div class="govuk-grid-row">
@@ -326,7 +330,7 @@
 
                     <!-- Pridať dokument -->
                     <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
+                        <a href="/uvod/pridanieDokumentu/"
                             class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
                             <div>
                                 <span class="govuk-heading-l govuk-!-margin-bottom-2">
@@ -339,25 +343,10 @@
                         </a>
                     </div>
 
-                    <!-- Upravit dokument -->
-                    <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
-                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-                            <div>
-                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                                    <i class="fas fa-edit"></i>
-                                </span>
-                                <p class="govuk-body">
-                                    <strong>Upravit dokument</strong>
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
 
                     <!-- Odstrániť dokument -->
                     <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
+                        <a href="/uvod/odstranenieDokumentu"
                             class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
                             <div>
                                 <span class="govuk-heading-l govuk-!-margin-bottom-2">
@@ -370,93 +359,16 @@
                         </a>
                     </div>
 
-                    <!-- Prehľad dokumentov -->
-                    <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
-                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-                            <div>
-                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                                    <i class="fas fa-file-alt"></i>
-                                </span>
-                                <p class="govuk-body">
-                                    <strong>Prehľad dokumentov</strong>
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
+                  
                 </div>
             </div>
+            {% endif %}
 
-            <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
 
-            <h2 class="govuk-heading-l">Všeobecná administrácia</h2>
-            <div class="govuk-body-m"></div>
-            <div class="govuk-grid-row">
-                <div class="govuk-grid-row no govuk-!-padding-top-0 govuk-!-padding-bottom-0 row-with-boxes">
 
-                    <!-- Nastavenia systému -->
-                    <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
-                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-                            <div>
-                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                                    <i class="fas fa-cogs"></i>
-                                </span>
-                                <p class="govuk-body">
-                                    <strong>Nastavenia systému</strong>
-                                </p>
-                            </div>
-                        </a>
-                    </div>
 
-                    <!-- Užívatelia a skupiny -->
-                    <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
-                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-                            <div>
-                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                                    <i class="fas fa-users"></i>
-                                </span>
-                                <p class="govuk-body">
-                                    <strong>Užívatelia a skupiny</strong>
-                                </p>
-                            </div>
-                        </a>
-                    </div>
 
-                    <!-- Audit a záznamy -->
-                    <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
-                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-                            <div>
-                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                                    <i class="fas fa-clipboard-list"></i>
-                                </span>
-                                <p class="govuk-body">
-                                    <strong>Audit a záznamy</strong>
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
-                    <!-- Záloha a obnova -->
-                    <div class="govuk-grid-column-one-quarter card">
-                        <a href="#"
-                            class="govuk-!-margin-bottom-6 standards govuk-!-padding-top-4 govuk-!-padding-bottom-2 govuk-!-padding-right-4 govuk-!-padding-left-4 module-icon">
-                            <div>
-                                <span class="govuk-heading-l govuk-!-margin-bottom-2">
-                                    <i class="fas fa-sync"></i>
-                                </span>
-                                <p class="govuk-body">
-                                    <strong>Záloha a obnova</strong>
-                                </p>
-                            </div>
-                        </a>
-                    </div>
-
-                </div>
-            </div>
+          
 
             <div class="idsk-grey-banner">
                 <div class="govuk-grid-row">

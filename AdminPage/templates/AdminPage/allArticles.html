@@ -86,7 +86,7 @@
                     <div class="govuk-grid-row">
                         <div class="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
                             <div class="idsk-header-web__main-headline">
-                                <a href="/" title="Odkaz na úvodnú stránku">
+                                <a href="/uvod" title="Odkaz na úvodnú stránku">
                                     <img src="{% static 'MainPage/assets/images/header-web/logo-placeholder.png'%}"
                                         alt="ID-SK Frontend" class="idsk-header-web__main-headline-logo">
                                     <span class="govuk-heading-m">
@@ -146,10 +146,10 @@
                 <h1 class="govuk-heading-l">Všetky články </h1>
               
 
-                <!-- Filtrovací formulář podla GOV.UK -->
-                <form method="get" action="{% url 'articleAdmin' %}" class="govuk-form-group">
-                    <div class="govuk-grid-row">
-                   <div class="govuk-grid-column-one-third">
+              <form method="get" action="{% url 'articleAdmin' %}" class="govuk-form-group">
+    <div class="govuk-grid-row">
+      <!-- Filtrování podle kategorie -->
+      <div class="govuk-grid-column-one-third">
         <div class="govuk-form-group">
           <label for="category" class="govuk-label">Kategória:</label>
           <select name="category" id="category" class="govuk-select">
@@ -187,11 +187,11 @@
         </div>
       </div>
     </div>
-</div>
-<div class="govuk-form-group">
-<input type="submit" value="Filtrovať" class="govuk-button">
-</div>
-                </form>
+
+    <div class="govuk-form-group">
+      <input type="submit" value="Filtrovať" class="govuk-button">
+    </div>
+  </form>
 
                 <!-- Tabulka článků podla GOV.UK -->
                 <table class="govuk-table">
@@ -201,6 +201,7 @@
                             <th class="govuk-table__header">Kategória</th>
                             <th class="govuk-table__header">Cieľové publikum</th>
                             <th class="govuk-table__header">Oddelenie</th>
+                            <th class="govuk-table__header">Životná situácia</th>
                             <th class="govuk-table__header">Vytvorené</th>
                             <th class="govuk-table__header">Akcia</th>
                         </tr>
@@ -212,6 +213,7 @@
                             <td class="govuk-table__cell">{{ article.category }}</td>
                             <td class="govuk-table__cell">{{ article.target_audience }}</td>
                             <td class="govuk-table__cell">{{ article.department }}</td>
+                            <td class="govuk-table__cell">{{ article.life_situation }}</td>
                             <td class="govuk-table__cell">{{ article.created_at|date:"d.m.Y H:i" }}</td>
                             <td class="govuk-table__cell">
                                 <a href="/clanok/{{ article.id }}"

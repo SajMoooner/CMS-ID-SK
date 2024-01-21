@@ -86,7 +86,7 @@
                     <div class="govuk-grid-row">
                         <div class="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
                             <div class="idsk-header-web__main-headline">
-                                <a href="/" title="Odkaz na úvodnú stránku">
+                                <a href="/uvod" title="Odkaz na úvodnú stránku">
                                     <img src="{% static 'MainPage/assets/images/header-web/logo-placeholder.png'%}"
                                         alt="ID-SK Frontend" class="idsk-header-web__main-headline-logo">
                                     <span class="govuk-heading-m">
@@ -145,59 +145,78 @@
             <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content">
                 <h1 class="govuk-heading-l">Odstránenie článku</h1>
 
-                <!-- Filtrovací formulář -->
-                <form method="get" action="" class="govuk-form-group">
-                    <div class="govuk-grid-row">
-                        <!-- Filtrování podle kategorie -->
-                        <div class="govuk-grid-column-one-third">
-                            <div class="govuk-form-group">
-                                <label for="category" class="govuk-label">Kategória:</label>
-                                <select name="category" id="category" class="govuk-select">
-                                    <option value="">Všetky</option>
-                                    {% for category in categories %}
-                                    <option value="{{ category.id }}">{{ category.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
 
-                        <!-- Filtrování podle cílového publika -->
-                        <div class="govuk-grid-column-one-third">
-                            <div class="govuk-form-group">
-                                <label for="target_audience" class="govuk-label">Cieľové publikum:</label>
-                                <select name="target_audience" id="target_audience" class="govuk-select">
-                                    <option value="">Všetky</option>
-                                    {% for audience in target_audiences %}
-                                    <option value="{{ audience.id }}">{{ audience.name }}</option>
-                                    {% endfor %}
-                                </select>
-                            </div>
-                        </div>
+                <div data-module="idsk-table-filter" id="example-table-2-filter" class="idsk-table-filter ">
+                    <div class="idsk-table-filter__panel idsk-table-filter__inputs">
+                        <div class="idsk-table-filter__title govuk-heading-m">Filtrovať obsah</div>
+                       
+                        <!-- Filtrovací formulář -->
+                        <form method="get" action="" class="govuk-form-group ">
+                            <div class="govuk-grid-row">
+                                <!-- Filtrování podle kategorie -->
+                                <div class="govuk-grid-column-one-third">
+                                    <div class="govuk-form-group">
+                                        <label for="category" class="govuk-label">Kategória:</label>
+                                        <select name="category" id="category" class="govuk-select">
+                                            <option value="">Všetky</option>
+                                            {% for category in categories %}
+                                            <option value="{{ category.id }}">{{ category.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
 
-                        <!-- Filtrování podle oddelení -->
-                        <div class="govuk-grid-column-one-third">
-                            <div class="govuk-form-group">
-                                <label for="department" class="govuk-label">Oddelenie:</label>
-                                <select name="department" id="department" class="govuk-select">
-                                    <option value="">Všetky</option>
-                                    {% for department in departments %}
-                                    <option value="{{ department.id }}">{{ department.name }}</option>
-                                    {% endfor %}
-                                </select>
+                                <!-- Filtrování podle cílového publika -->
+                                <div class="govuk-grid-column-one-third">
+                                    <div class="govuk-form-group">
+                                        <label for="target_audience" class="govuk-label">Cieľové publikum:</label>
+                                        <select  name="target_audience" id="target_audience" class="govuk-select">
+                                            <option value="">Všetky</option>
+                                            {% for audience in target_audiences %}
+                                            <option value="{{ audience.id }}">{{ audience.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                <!-- Filtrování podle oddelení -->
+                                <div class="govuk-grid-column-one-third">
+                                    <div class="govuk-form-group">
+                                        <label for="department" class="govuk-label">Oddelenie:</label>
+                                        <select name="department" id="department" class="govuk-select">
+                                            <option value="">Všetky</option>
+                                            {% for department in departments %}
+                                            <option value="{{ department.id }}">{{ department.name }}</option>
+                                            {% endfor %}
+                                        </select>
+                                    </div>
+                                </div>
+
+                                
                             </div>
-                        </div>
+
+                            <div class="govuk-form-group" style="margin-top:20px">
+                                <button type="submit" class="govuk-button">
+                                    Filtrovať
+                                  </button>
+                            </div>
+                            
+                        </form>
+
+                        
+    
                     </div>
+                    
 
-                    <input type="submit" value="Filtrovať" class="govuk-button">
-                </form>
 
                 <!-- Tabulka článků s tlačítky pro odstranění -->
-                <table class="govuk-table">
+                <table class="govuk-table" style="margin-top:20px">
                     <thead class="govuk-table__head">
                         <tr class="govuk-table__row">
                             <th class="govuk-table__header">Názov</th>
                             <th class="govuk-table__header">Kategória</th>
                             <th class="govuk-table__header">Oddelenie</th>
+                            <th class="govuk-table__header">Životná situácia</th>
                             <th class="govuk-table__header">Vytvorené</th>
                             <th class="govuk-table__header">Akcia</th>
                         </tr>
@@ -208,14 +227,15 @@
                             <td class="govuk-table__cell">{{ article.title }}</td>
                             <td class="govuk-table__cell">{{ article.category }}</td>
                             <td class="govuk-table__cell">{{ article.department }}</td>
+                            <td class="govuk-table__cell">{{ article.life_situation }}</td>
                             <td class="govuk-table__cell">{{ article.created_at|date:"d.m.Y H:i" }}</td>
                             <td class="govuk-table__cell">
-                                <form method="post" action="{% url 'deleteArticle' %}" >
+                                <form method="post" action="{% url 'deleteArticle' %}">
                                     {% csrf_token %}
                                     <input type="hidden" name="article_id" value="{{ article.id }}">
                                     <input type="submit" value="Vymazať" class="govuk-button govuk-button--warning">
-                                  </form>
-                                  
+                                </form>
+
                             </td>
                         </tr>
                         {% endfor %}
@@ -311,6 +331,25 @@
         });
     </script>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+          var filterToggle = document.querySelector('.idsk-filter-menu__toggle');
+          var filterContent = document.querySelector('.idsk-table-filter__content');
+      
+          if (filterToggle && filterContent) {
+            filterToggle.addEventListener('click', function() {
+              filterContent.classList.toggle('idsk-table-filter--expanded');
+              if (filterContent.classList.contains('idsk-table-filter--expanded')) {
+                filterToggle.textContent = filterToggle.getAttribute('data-close-text');
+              } else {
+                filterToggle.textContent = filterToggle.getAttribute('data-open-text');
+              }
+            });
+          }
+        });
+      </script>
+      
+      
 
 </body>
 

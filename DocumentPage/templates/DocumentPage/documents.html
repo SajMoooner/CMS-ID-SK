@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="sk" class="govuk-template app-no-canvas-background">
+
+<head>
+
+    <meta charset="utf-8" />
+    <title>Dokument</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+    <meta name="theme-color" content="#0b0c0c" />
+
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+    {% load static %}
+    {% load widget_tweaks %}
+    <link rel="stylesheet" href="{% static 'MainPage/idsk-frontend-2.11.0.min.css'%}">
+    <link rel="stylesheet" href="{% static 'AdminPage/style.css'%}">
+    <script src="{% static 'MainPage/idsk-frontend.min.js'%}"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+
+
+</head>
+
+<body class="govuk-template__body ">
+    <script>document.body.className = ((document.body.className) ? document.body.className + ' js-enabled' : 'js-enabled');</script>
+
+
+
+    <header class="idsk-header-web " data-module="idsk-header-web">
+        <div class="idsk-header-web__scrolling-wrapper">
+          <!-- Warning Banner Starts Here -->
+          <div class="idsk-header-web__banner idsk-header-web__banner--warning">
+            <div class="govuk-width-container">
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                  <div class="govuk-body-s idsk-header-web__banner-title">
+                    <div class="idsk-header-web__warning-icon"></div>
+                    Upozornenie: Toto je testovacia verzia a slúži výhradne na demonštračné účely. Všetky údaje a interakcie
+                    na tejto stránke sú fiktívne a riadia sa podľa zákona č. 18/2018 Z. z. o ochrane osobných údajov.
+                  </div>
+                  <button class="idsk-header-web__banner-close" aria-label="Zavrieť banner"><span
+                      class="idsk-header-web__menu-close"></span></button>
+                </div>
+              </div>
+            </div>
+          </div>
+          <!-- Warning Banner Ends Here -->
+          <div class="idsk-header-web__tricolor"></div>
+          <div class="idsk-header-web__brand ">
+            <div class="govuk-width-container">
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                  <div class="idsk-header-web__brand-gestor">
+                    <span class="govuk-body-s idsk-header-web__brand-gestor-text">
+                      Testovacia stránka verejnej správy
+                    </span>
+                  </div>
+                  <div class="idsk-header-web__brand-spacer"></div>
+                  <div class="idsk-header-web__brand-language">
+                    <button class="idsk-header-web__brand-language-button" aria-label="Rozbaliť jazykové menu"
+                      aria-expanded="false" data-text-for-hide="Skryť jazykové menu"
+                      data-text-for-show="Rozbaliť jazykové menu">
+                      Slovenčina
+                      <span class="idsk-header-web__link-arrow"></span>
+                    </button>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <div class="idsk-header-web__main">
+            <div class="govuk-width-container">
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full govuk-grid-column-one-third-from-desktop">
+                  <div class="idsk-header-web__main-headline">
+                    <a href="/" title="Odkaz na úvodnú stránku">
+                      <img src="{%static 'MainPage/assets/images/slovenskosk.png'%}" alt="ID-SK Frontend"
+                        class="idsk-header-web__main-headline-logo">
+                    
+                    </a>
+    
+                    <button class="idsk-button idsk-header-web__main-headline-menu-button" aria-label="Rozbaliť menu"
+                      aria-expanded="false" data-text-for-show="Rozbaliť menu" data-text-for-hide="Zavrieť menu">
+                      Menu
+                      <span class="idsk-header-web__menu-open"></span>
+                      <span class="idsk-header-web__menu-close"></span>
+                    </button>
+                  </div>
+                </div>
+    
+                <div class="govuk-grid-column-two-thirds">
+                  <div class="idsk-header-web__main-action">
+                    
+    
+                    <div class="idsk-header-web__main--buttons">
+                    </div>
+
+                    <div class="idsk-header-web__main--buttons">
+                      <button type="button" class="idsk-button idsk-header-web__main--login-logoutbtn" data-module="idsk-button">
+                        Elektronické služby
+                      </button>
+                    </div>
+    
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+    
+          <div class="idsk-header-web__nav--divider"></div>
+          <div class="idsk-header-web__nav idsk-header-web__nav--mobile ">
+            <div class="govuk-width-container">
+              <div class="govuk-grid-row">
+                <div class="govuk-grid-column-full">
+                </div>
+                <div class="govuk-grid-column-full">
+                 <!-- Navigation block -->
+                
+                 <nav class="">
+                  <!-- Unordered list to hold the navigation items -->
+                  <ul class="idsk-header-web__nav-list" aria-label="Hlavná navigácia">
+                      <!-- Loop through each category passed from the context -->
+                      {% for category in categories %}
+                      <li class="idsk-header-web__nav-list-item">
+                          <!-- Check if the current category has subcategories -->
+                          {% if category.subcategories.all %}
+                          <!-- This link acts as a dropdown trigger for subcategories -->
+                          <a class="govuk-link idsk-header-web__nav-list-item-link" href="#"
+                              title="{{ category.name }}" aria-label="Rozbaliť {{ category.name }} menu"
+                              aria-expanded="false" data-text-for-hide="Zavrieť {{ category.name }} menu"
+                              data-text-for-show="Rozbaliť {{ category.name }} menu">
+                              {{ category.name }}
+                              <!-- Visual elements for the link indicating a dropdown -->
+                              <div class="idsk-header-web__link-arrow"></div>
+                              <div class="idsk-header-web__link-arrow-mobile"></div>
+                          </a>
+                          <!-- Submenu container for subcategories -->
+                          <div class="idsk-header-web__nav-submenulite">
+                              <!-- Unordered list to hold subcategories -->
+                              <ul class="idsk-header-web__nav-submenulite-list"
+                                  aria-label="{{ category.name }} submenu">
+                                  <!-- Loop through each subcategory of the current category -->
+                                  {% for subcategory in category.subcategories.all %}
+                                  <li class="idsk-header-web__nav-submenulite-list-item">
+                                      <!-- Link to the subcategory page -->
+                                      <a class="govuk-link idsk-header-web__nav-submenulite-list-item-link"
+                                          href="{{ subcategory.link }}" title="{{ subcategory.name }}">
+                                          <span>{{ subcategory.name }}</span>
+                                      </a>
+                                  </li>
+                                  {% endfor %}
+                              </ul>
+                          </div>
+                          <!-- If there are no subcategories, just display a regular link -->
+                          {% else %}
+                          <a class="govuk-link idsk-header-web__nav-list-item-link"
+                          href ="/kategoria/kat={{ category.id|slugify }}/zivotna=null/komu=null/oddelenie=null/text=null" title="{{ category.name }}">
+                            {{ category.name}}
+                          </a>
+                          {% endif %}
+                      </li>
+                      {% endfor %}
+                  </ul>
+              </nav>
+                </div>
+              </div>
+             
+            </div>
+          </div>
+    
+        </div>
+      </header>
+      <style>
+        .card {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          justify-content: center;
+          background-color: #fff;
+          border: none;
+          box-shadow: 0px 4px 8px rgba(0, 0, 0, 0.1);
+          border-radius: 10px;
+          padding: 20px;
+    
+          width: 240px;
+          /* Alebo iná šírka podľa potreby */
+          height: 120px;
+          /* Alebo iná výška podľa potreby */
+          text-align: center;
+          font-size: 16px;
+          text-decoration: none;
+          color: #000;
+          transition: transform 0.2s;
+          box-sizing: border-box;
+          /* Uistite sa, že padding a border sú zahrnuté do šírky karty */
+          margin: 5px;
+          /* Malý priestor medzi kartami */
+          flex: 0 1 calc(25% - 10px);
+          /* Flexibilný rast, flexibilný základ, automatická šírka s odpočítaním margin */
+        }
+    
+        .card:hover {
+          transform: scale(1.05);
+        }
+    
+        .card i {
+          font-size: 3em;
+          /* Veľkosť ikony */
+          color: #005ea5;
+          /* Farba ikony */
+        }
+    
+        .card p {
+          font-weight: bold;
+          margin-top: 10px;
+        }
+    
+        @media (max-width: 767px) {
+          .card {
+            flex: 0 1 calc(100% - 10px);
+            /* 1 karta na celú šírku */
+          }
+        }
+    
+        /* Mediá query pre stredne veľké obrazovky (napr. tablety) */
+        @media (min-width: 768px) and (max-width: 991px) {
+          .card {
+            flex: 0 1 calc(50% - 10px);
+            /* 2 karty v riadku */
+          }
+        }
+    
+        /* Mediá query pre veľké obrazovky (od 992px a viac) */
+        @media (min-width: 992px) {
+          .card {
+            flex: 0 1 calc(25% - 10px);
+            /* 4 karty v riadku */
+          }
+        }
+      </style>
+    
+
+     
+        <div class="px-4 py-5 my-5 text-center" style="
+        background-image: url('/static/MainPage/assets/images/document.jpg?width=3440;height=840');
+        background-position: center;
+        background-size: cover;
+        background-repeat: no-repeat;
+        width: 100vw;
+        height: 350px;
+        margin-left: calc(-50vw + 50%);
+        position: relative;
+       ">
+        </div>
+
+        <div class="govuk-width-container">
+            <div class="govuk-breadcrumbs">
+                <ol class="govuk-breadcrumbs__list">
+                    <li class="govuk-breadcrumbs__list-item">
+                        <a class="govuk-breadcrumbs__link" href="/">Domov</a>
+                    </li>
+                    <li class="govuk-breadcrumbs__list-item" aria-current="page">Dokumenty</li>
+                </ol>
+            </div>
+        
+        <div class="govuk-width-container">
+            <main class="govuk-main-wrapper govuk-main-wrapper--auto-spacing" id="main-content">
+               
+                <div class="govuk-grid-row" style="display: flex; flex-wrap: wrap; margin-right: -5px; margin-left: -5px;" >
+                  <a href="#" class="card" data-document-type-id="1">
+                    <i class="fas fa-file-invoice-dollar"></i>
+                    <p>Faktúry dodávateľ</p>
+                  </a>
+                  <a href="#" class="card" data-document-type-id="2">
+                    <i class="fas fa-file-invoice"></i>
+                    <p>Faktúry odoberateľ</p>
+                  </a>
+                  <a href="#" class="card" data-document-type-id="4">
+                    <i class="fas fa-handshake"></i>
+                    <p>Zmluvy</p>
+                  </a>
+                  <a href="#" class="card" data-document-type-id="3">
+                    <i class="fas fa-shopping-cart"></i>
+                    <p>Objednávky</p>
+                  </a>
+                  
+                  </div>
+            
+                <hr class="idsk-hr-separator govuk-!-margin-bottom-6">
+                <div data-module="idsk-table" id="priklad-3">
+                    <div class="idsk-table__heading">
+                        <div>
+                            <h2 class="govuk-heading-l govuk-!-margin-bottom-4">Povinné zverejňovanie</h2>
+                            <p class="govuk-body">Podľa zákona č. 211/2000 Z. z. o slobodnom prístupe k informáciám a zákona č. 546/2010 Z. z. o verejnom obstarávaní sú mestá a orgány verejnej moci povinné zverejňovať dokumenty, ako sú zmluvy, faktúry a rozhodnutia. Tieto zákony majú za cieľ zabezpečiť transparentnosť verejnej správy a posilniť kontrolu občanov nad činnosťou týchto inštitúcií.</p>
+                        </div>
+                       
+                          </div>
+                        </div>
+                    </div>
+                    
+                    
+                <table class="idsk-table" style="margin-top:20px">
+                    <thead class="govuk-table__head">
+                        <tr class="govuk-table__row">
+                            <th class="govuk-table__header">Číslo</th>
+                            <th class="govuk-table__header">Zverejnené</th>
+                            <th class="govuk-table__header">Zmluvný partner</th>
+                            <th class="govuk-table__header">Suma</th>
+                            <th class="govuk-table__header">DPH</th>
+                            <th class="govuk-table__header">Predmet</th>
+                            <th class="govuk-table__header">Stiahnuť</th>
+                        </tr>
+                    </thead>
+                    <tbody class="govuk-table__body">
+                       
+                    </tbody>
+                    
+                </table>
+
+            </main>
+        </div>
+    </div>
+
+
+    <div data-module="idsk-footer-extended">
+        <footer class="idsk-footer-extended  ">
+            <div class="idsk-footer-extended-main-content">
+                <div class="govuk-width-container">
+                    <div class="govuk-grid-column-full">
+                        <div class="idsk-footer-extended-description-panel">
+                            <div class="idsk-footer-extended-meta-item">
+                                <ul class="idsk-footer-extended-inline-list ">
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Pomoc" href="#">
+                                            Pomoc
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Cookies" href="#">
+                                            Cookies
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Kontakty" href="#">
+                                            Kontakty
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Mapa Stránky" href="#">
+                                            Mapa Stránky
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="RSS" href="#">
+                                            RSS
+                                        </a>
+                                    </li>
+                                    <li class="idsk-footer-extended-inline-list-item">
+                                        <a class="govuk-link" title="Vyhlásenie o prístupnosti" href="#">
+                                            Vyhlásenie o prístupnosti
+                                        </a>
+                                    </li>
+                                </ul>
+                            </div>
+                            <div class="govuk-grid-column-two-thirds idsk-footer-extended-info-links">
+                                <p class="idsk-footer-extended-frame">Vytvorené v súlade s
+                                    <a class="govuk-link" title="Jednotným dizajn manuálom elektronických služieb."
+                                        href="#">
+                                        Jednotným dizajn manuálom elektronických služieb.
+                                    </a>
+                                </p>
+
+                            </div>
+                            <div class="govuk-grid-column-one-third idsk-footer-extended-logo-box">
+
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </footer>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script>window.GOVUKFrontend.initAll()</script>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        // Načíta a zobrazí dokumenty pri načítaní stránky
+        fetchAndDisplayDocuments();
+    
+        // Nastaví obsluhu kliknutia pre každé tlačidlo
+        const buttons = document.querySelectorAll('.card');
+        buttons.forEach(button => {
+            button.addEventListener('click', function(event) {
+                event.preventDefault();
+                const documentTypeId = this.getAttribute('data-document-type-id');
+                fetchAndDisplayDocuments(documentTypeId);
+            });
+        });
+    });
+    
+    function fetchCompanies() {
+        return fetch('http://localhost:8000/dokumenty/api/get_companies/')
+            .then(response => response.json())
+            .then(companies => {
+                const companyMap = {};
+                companies.forEach(company => {
+                    companyMap[company.id] = company.name;
+                });
+                return companyMap;
+            });
+    }
+    
+    function fetchAndDisplayDocuments(documentTypeId = null) {
+        fetchCompanies().then(companyMap => {
+            let url = 'http://localhost:8000/dokumenty/api/get_documents/';
+            if (documentTypeId) {
+                url += `?document_type_id=${documentTypeId}`;
+            }
+    
+            fetch(url)
+                .then(response => response.json())
+                .then(documents => {
+                    const tableBody = document.querySelector('.govuk-table__body');
+                    tableBody.innerHTML = ''; // Vymaže existujúci obsah tabuľky
+                    documents.forEach(doc => {
+                        const row = document.createElement('tr');
+                        row.classList.add('govuk-table__row');
+    
+                        const publishedDate = new Date(doc.published_date);
+                        const formattedDate = publishedDate.toLocaleDateString('sk-SK');
+                        const companyName = companyMap[doc.company_id] || 'Neznáma firma';
+                        
+                        // Vytvoriť odkazy na stiahnutie pre každú prílohu
+                        const attachmentLinks = doc.attachments.map(url => 
+                            `<a href="${url}" download><i class="fas fa-download"></i></a>`
+                        ).join(' ');
+    
+                        row.innerHTML = `
+                            <td class="govuk-table__cell">${doc.number}</td>
+                            <td class="govuk-table__cell">${formattedDate}</td>
+                            <td class="govuk-table__cell">${companyName}</td>
+                            <td class="govuk-table__cell">€ ${doc.amount}</td>
+                            <td class="govuk-table__cell">${doc.vat}%</td>
+                            <td class="govuk-table__cell">${doc.subject}</td>
+                            <td class="govuk-table__cell">${attachmentLinks}</td>
+                        `;
+                        tableBody.appendChild(row);
+                    });
+                })
+                .catch(error => console.error('Error:', error));
+        });
+    }
+    
+  </script>
+  
+      
+      
+
+</body>
+
+</html>

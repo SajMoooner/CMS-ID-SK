@@ -12,6 +12,8 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 from pathlib import Path
 import os
+from django.conf import settings
+from django.conf.urls.static import static
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -43,6 +45,7 @@ INSTALLED_APPS = [
     'ArticlePage',
     'LoginPage',
     'AdminPage',
+    'DocumentPage',
     'widget_tweaks',
 ]
 
@@ -57,6 +60,7 @@ MIDDLEWARE = [
 ]
 
 ROOT_URLCONF = 'mestoSlovakoSoft.urls'
+
 
 TEMPLATES = [
     {
@@ -119,9 +123,8 @@ USE_I18N = True
 USE_TZ = True
 
 # Cesta k médiím
+MEDIA_ROOT = '/var/www/mestoSlovakoSoft/media'
 MEDIA_URL = '/media/'
-MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
-
 
 
 
@@ -135,3 +138,14 @@ STATIC_ROOT = os.path.join(BASE_DIR, 'staticfiles')
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+# Časový limit session v sekundách
+SESSION_COOKIE_AGE = 1800  # 30 minút
+
+# Obnoviť session pri každej požiadavke používateľa
+SESSION_SAVE_EVERY_REQUEST = True
+
+# Nasatavenie redirectu ak používateľ nie je prihlásený
+LOGIN_URL = '/prihlasenie/'
+
+

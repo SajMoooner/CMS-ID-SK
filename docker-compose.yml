@@ -6,7 +6,6 @@ services:
     command: python manage.py runserver 0.0.0.0:8000
     volumes:
       - .:/app
-      - ./media:/app/media
+      - ./media:/var/www/mestoSlovakoSoft/media
     ports:
       - "8000:8000"
-

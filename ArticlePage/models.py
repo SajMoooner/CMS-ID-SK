@@ -1,9 +1,10 @@
 from django.db import models
 from MainPage.models import Category
 
-# Create your models here.
+
 class TargetAudience(models.Model):
     name = models.CharField(max_length=50, unique=True)
+    icon_text = models.CharField(max_length=100, blank=True)
 
     def __str__(self):
         return self.name
@@ -15,24 +16,38 @@ class TargetAudience(models.Model):
 
 class Department(models.Model):
     name = models.CharField(max_length=100, unique=True)
-
+    icon_text = models.CharField(max_length=100, blank=True)
+    
     def __str__(self):
         return self.name
 
     class Meta:
         verbose_name = 'Department'
         verbose_name_plural = 'Departments'
+        
+class LifeSituation(models.Model):
+    name = models.CharField(max_length=100, unique=False)
+    icon_text = models.CharField(max_length=100, blank=True)
+
+    def __str__(self):
+        return self.name
+
+    class Meta:
+        verbose_name = 'Life Situation'
+        verbose_name_plural = 'Life Situations'
 
 
 class Article(models.Model):
     category = models.ForeignKey(Category, on_delete=models.CASCADE)
-    department = models.ForeignKey(Department, on_delete=models.CASCADE, blank=True, null=True)
+    department = models.ForeignKey(Department, on_delete=models.CASCADE)
+    life_situation = models.ForeignKey(LifeSituation, on_delete=models.SET_NULL, blank=True, null=True)
     main_message = models.CharField(max_length=255)
     target_audience = models.ForeignKey(TargetAudience, on_delete=models.CASCADE, blank=True, null=True)
     title = models.CharField(max_length=100)
     content = models.TextField()
     image = models.ImageField(upload_to='articlesImages/', blank=True, null=True)
     created_at = models.DateTimeField(auto_now_add=True)
+
 
     def __str__(self):
         return self.title
@@ -47,10 +62,10 @@ class Subtitle(models.Model):
     text = models.TextField( blank=True, null=False)
     image = models.ImageField(upload_to='subtitle_images/', blank=True, null=True)
 
+    
     def __str__(self):
         return self.title
 
     class Meta:
         verbose_name = 'Subtitle'
         verbose_name_plural = 'Subtitles'
-        

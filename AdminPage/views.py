@@ -1,4 +1,5 @@
 from MainPage.models import Category, Subcategory
+from django.contrib.auth.decorators import login_required
 from django.views.decorators.http import require_POST
 from django.shortcuts import render, get_object_or_404, redirect
 from django.urls import reverse
@@ -9,16 +10,25 @@ from django.views.decorators.http import require_http_methods
 from django.shortcuts import get_object_or_404, redirect
 from django.urls import reverse
 from django.views.decorators.http import require_http_methods
-from .forms import ArticleForm, SubtitleForm, ArticleFilterForm
-from ArticlePage.models import Article, Subtitle, Category, TargetAudience, Department
+from .forms import ArticleForm, SubtitleForm, ArticleFilterForm, CategorySelectForm,DocumentForm
+from ArticlePage.models import Article, Subtitle, Category, TargetAudience, Department, LifeSituation
 from django.http import JsonResponse
+from DocumentPage.models import Document, Attachment, Company, DocumentType
 
 
-# Create your views here.
 
+@login_required
 def homeAdmin(request):
-    return render(request, 'AdminPage/homeAdmin.html')
+    user_groups = request.user.groups.values_list('name', flat=True)
+    context = {
+        'is_uradnik': 'Úradnik' in user_groups,
+        'is_fakturant': 'Fakturant' in user_groups,
+        'is_spravca': 'Správca' in user_groups,
+        'is_superadmin': 'SuperAdmin' in user_groups,
+    }
+    return render(request, 'AdminPage/homeAdmin.html', context)
 
+@login_required
 def categoryAdmin(request):
     categories = Category.objects.all()
     context = {
@@ -27,7 +37,7 @@ def categoryAdmin(request):
     return render(request, 'AdminPage/categoryAdmin.html', context)
 
 #--------Pridanie clanku----------------#
-
+@login_required
 def articleAdmin(request):
     if request.method == 'POST':
         article_form = ArticleForm(request.POST, request.FILES)
@@ -52,7 +62,7 @@ def articleAdmin(request):
 
 
 #--------Pridanie kategorie----------------#
-
+@login_required
 @require_POST
 def delete_category(request, category_id):
     category = get_object_or_404(Category, pk=category_id)
@@ -79,6 +89,7 @@ def categoryAdmin(request):
     }
     return render(request, 'AdminPage/categoryAdmin.html', context)
 
+@login_required
 @require_POST
 def update_category(request, category_id):
     category = get_object_or_404(Category, id=category_id)
@@ -94,6 +105,7 @@ def update_category(request, category_id):
     return redirect('categoryAdmin')
 
 #---------Uprava clanku-----------------#
+@login_required
 def updateArticle(request):
     form = ArticleFilterForm(request.POST or None)
     selected_article = None
@@ -150,7 +162,7 @@ def updateArticle(request):
   })
     
 #--------Odstranenie clanku----------------#
-    
+@login_required
 def deleteArticle(request):
     # Filtrování článků
     articles_query = Article.objects.all()
@@ -186,7 +198,7 @@ def deleteArticle(request):
     return render(request, 'AdminPage/deleteArticle.html', context)
 
 #--------Vsetky clanky----------------#
-
+@login_required
 def allArticles(request):
     articles = Article.objects.all()
 
@@ -214,9 +226,129 @@ def allArticles(request):
     }
     return render(request, 'AdminPage/allArticles.html', context)
 
+#--------Menu----------------#
+
+@login_required
+def addMenu(request):
+    selected_category_id = None
+    category_form = CategorySelectForm(request.POST or None)
+
+    if request.method == 'POST':
+        if 'new_name' in request.POST:  # Přidání nové podkategorie
+            new_name = request.POST.get('new_name', '')
+            new_link = request.POST.get('new_link', '')
+            selected_category_id = request.POST.get('category_id', '')
+
+            if new_name and selected_category_id:
+                selected_category = Category.objects.get(id=selected_category_id)
+                Subcategory.objects.create(category=selected_category, name=new_name, link=new_link)
+                
+
+        elif category_form.is_valid():
+            selected_category = category_form.cleaned_data['category']
+            selected_category_id = str(selected_category.id) if selected_category else None
+
+        # Uložení vybrané kategorie do session
+        request.session['selected_category_id'] = selected_category_id
+
+    else:  # GET request
+        # Obnovení vybrané kategorie ze session
+        selected_category_id = request.session.get('selected_category_id')
+
+    if selected_category_id:
+        # Vytvoření formuláře s výchozí hodnotou
+        category_form = CategorySelectForm(initial={'category': selected_category_id})
+        subcategories = Subcategory.objects.filter(category_id=selected_category_id)
+    else:
+        subcategories = []
+
+    return render(request, 'AdminPage/addMenu.html', {
+        'category_form': category_form,
+        'subcategories': subcategories,
+    })
 
 
+@login_required
+def delete_subcategory(request, subcategory_id):
+    subcategory = get_object_or_404(Subcategory, id=subcategory_id)
+    subcategory.delete()
+    return redirect('/uvod/menu')  # Redirekt zpět na seznam podkategorií
+
+@login_required
+def edit_subcategory(request, subcategory_id):
+    subcategory = get_object_or_404(Subcategory, id=subcategory_id)
+
+    if request.method == 'POST':
+        subcategory.name = request.POST.get('name', '')
+        subcategory.link = request.POST.get('link', '')
+        subcategory.save()
+        return redirect('/uvod/menu')  # nebo jiná URL pro návrat
+
+    # Pokud je GET požadavek, zobrazte stránku pro úpravu (nebo můžete přesměrovat jinam)
+    return render(request, '/uvod/menu', {'subcategory': subcategory})
+
+#--------Pridanie dokumentu----------------#
+
+@login_required
+def addDocument(request):
+    if request.method == 'POST':
+        doc_form = DocumentForm(request.POST, request.FILES)
+
+        if doc_form.is_valid():
+            document = doc_form.save(commit=False)
+            document.save()
+            # Priradenie príloh k dokumentu
+            for file in request.FILES.getlist('attachments'):
+                Attachment.objects.create(file=file, document=document)
+            
+            doc_form.save_m2m()  # Uloženie ManyToMany vzťahov
+            return redirect('/uvod')  # Presmerovanie po úspešnom uložení
+
+    else:
+        doc_form = DocumentForm()
+
+    return render(request, 'AdminPage/addDocument.html', {'form': doc_form})
 
 
+@login_required
+def viewDocuments(request):
+    documents = Document.objects.all()
+    return render(request, 'AdminPage/deleteDocument.html', {'documents': documents})
 
+@login_required
+def deleteDocument(request, document_id):
+    if request.method == 'POST':
+        Document.objects.filter(id=document_id).delete()
+        return redirect('viewDocuments')
     
+
+@login_required
+def updateDocument(request):
+    document_types = DocumentType.objects.all()
+    selected_document = request.GET.get('document')
+
+    if request.method == 'POST':
+        document_id = request.POST.get('document_id')
+        if document_id:
+            document = get_object_or_404(Document, id=document_id)
+            form = DocumentForm(request.POST, request.FILES, instance=document)
+            if form.is_valid():
+                form.save()
+                return redirect('updateDocument')
+        else:
+            form = DocumentForm(request.POST, request.FILES)
+            if form.is_valid():
+                form.save()
+                return redirect('updateDocument')
+    else:
+        form = DocumentForm()
+        if selected_document:
+            selected_document = int(selected_document)
+            document = get_object_or_404(Document, id=selected_document)
+            form = DocumentForm(instance=document)
+
+    return render(request, 'AdminPage/updateDocument.html', {
+        'form': form,
+        'document_types': document_types,
+        'selected_document': selected_document
+    })

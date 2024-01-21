@@ -115,50 +115,31 @@
 
             <div class="app-whitespace-highlight">
                 <div data-module="idsk-registration-for-event" class="idsk-registration-for-event">
-                    <form class="idsk-registration-for-event__form">
+                    <form class="idsk-registration-for-event__form" action="/prihlasenie/" method="POST">
+                        {% csrf_token %}
                         <fieldset class="govuk-fieldset">
                             <legend class="govuk-fieldset__legend govuk-fieldset__legend--m">
                                 <h3 class="govuk-fieldset__heading idsk-customer-surveys--subtitle">Prihlásenie</h3>
                             </legend>
 
                             <div class="govuk-form-group">
-                                <label class="govuk-label" for="email">Meno</label>
+                                <label class="govuk-label" for="username">Meno</label>
                                 <span class="govuk-hint">Sem zadajte prihlasovacie meno</span>
                                 <span class="govuk-error-message">
-                                    <span class="govuk-visually-hidden">Chyba:</span>Zadajte správnu emailovú
-                                    adresu.
+                                    <span class="govuk-visually-hidden">Chyba:</span>Zadajte správne používateľské meno.
                                 </span>
-                                <input type="email" class="govuk-input" id="email" name="email" required>
+                                <input type="text" class="govuk-input" id="username" name="username" required>
                             </div>
                             <div class="govuk-form-group">
                                 <label class="govuk-label" for="password">Heslo</label>
                                 <span class="govuk-hint"></span>
-                                <input type="text" class="govuk-input" id="password" name="password">
+                                <input type="password" class="govuk-input" id="password" name="password" required>
                             </div>
-                            <div class="govuk-form-group">
-                                <label class="govuk-label" for="organization">KOD Mesta</label>
-                                <span class="govuk-hint"></span>
-                                <input type="text" class="govuk-input" id="organization" name="organization">
-                            </div>
-
-                            <div class="govuk-form-group">
-                                <span class="govuk-error-message">
-                                    <span class="govuk-visually-hidden">Chyba:</span>Prosím, akceptujte súhlas so
-                                    spracovaním osobných údajov.
-                                </span>
-                                <div class="govuk-checkboxes">
-                                    <div class="govuk-checkboxes__item">
-                                        <input type="checkbox" class="govuk-checkboxes__input" id="terms" name="terms"
-                                            required>
-                                        <label class="govuk-label  govuk-checkboxes__label" for="terms">Obaznámil
-                                            som sa zo zákonom SR č. 42/2023 Z. z. o digitálnej identite a
-                                            elektronickej autentifikácii</label>
-                                    </div>
-                                </div>
-                            </div>
-                            <div class="govuk-form-group">
-                                <button type="submit" class="govuk-button">Prihlásenie</button>
-                            </div>
+                            
+                         
+                         
+                            <button type="submit" class="govuk-button">Prihlásenie</button>
+                        </div>
                         </fieldset>
                     </form>
                 </div>

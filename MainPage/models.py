@@ -20,6 +20,7 @@ class Subcategory(models.Model):
         db_index=True
     )
     name = models.CharField(max_length=100, db_index=True)
+    link = models.CharField(max_length=100,null=True, blank=True)
 
     def __str__(self):
         return f"{self.category.name} - {self.name}"

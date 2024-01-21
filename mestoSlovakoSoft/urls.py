@@ -25,7 +25,5 @@ urlpatterns = [
     path('clanok/',include('ArticlePage.urls')),
     path('prihlasenie/',include('LoginPage.urls')),
     path('uvod/',include('AdminPage.urls')),
-]
-
-if settings.DEBUG:
-    urlpatterns += static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)
+    path('dokumenty/',include('DocumentPage.urls')),
+] + static(settings.MEDIA_URL, document_root=settings.MEDIA_ROOT)

@@ -1,11 +1,13 @@
 from django import forms
 from ArticlePage.models import Article, Subtitle
 from MainPage.models import Category, Subcategory
+from DocumentPage.models import Document, Attachment
+
 
 class ArticleForm(forms.ModelForm):
     class Meta:
         model = Article
-        fields = ['category', 'department', 'main_message', 'target_audience', 'title', 'content', 'image']
+        fields = ['category', 'department','life_situation' ,'main_message', 'target_audience', 'title', 'content', 'image']
 
 class SubtitleForm(forms.ModelForm):
     class Meta:
@@ -25,3 +27,12 @@ class ArticleFilterForm(forms.Form):
             except (ValueError, TypeError):
                 pass
             
+class CategorySelectForm(forms.Form):
+    category = forms.ModelChoiceField(queryset=Category.objects.all(), required=False, empty_label="Vyberte kategorii")
+
+
+class DocumentForm(forms.ModelForm):
+    class Meta:
+        model = Document
+        fields = ['number', 'published_date', 'company', 'document_type', 'amount', 'vat', 'subject', 'signed_by', 'attachments']
+        # Vylúčiť pole 'attachments' z tohto formulára
