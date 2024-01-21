@@ -61,22 +61,27 @@ Projekt nasleduje filozofiu Django, kde každá appka slúži jednému účelu.
 
 # MainPage
 
-<img width="823" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/a1df576b-9217-42c8-8569-c5fcbd43f932">
+<img width="1147" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/98c7dbcb-6908-45d3-951e-0d3a51bf5fc8">
+
 
 # CategoryPage
 
-<img width="595" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/6a1df68d-9f59-4313-a7d1-cba81551c7ae">
+<img width="1075" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/7f697be3-a54b-4828-9619-ae4fe09b0806">
+
 
 # ArticlePage
 
-<img width="781" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/511c27fe-b51d-4930-bc1b-fcaacb33b234">
+<img width="913" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/32f46302-15bd-4f7c-9189-096cf8b29b06">
+
 
 # LoginPage
 
-<img width="715" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/d3cf425f-9e8f-4869-8ab2-aab054bfc408">
+<img width="905" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/a6b6d8ab-ff94-40f1-a795-e322a6fc3578">
+
 
 # AdminPage
 
-<img width="674" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/48fd37c3-b7cf-43d0-8eef-490dffeebe5f">
+<img width="1085" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/0631ab38-534b-4a38-a599-2e630c3a867e">
+
 
 
