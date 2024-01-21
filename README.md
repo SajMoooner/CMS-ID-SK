@@ -81,7 +81,8 @@ Projekt nasleduje filozofiu Django, kde každá appka slúži jednému účelu.
 
 # AdminPage
 
-<img width="1085" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/0631ab38-534b-4a38-a599-2e630c3a867e">
+<img width="655" alt="image" src="https://github.com/SajMoooner/CMS-ID-SK/assets/70257823/c0da471d-1bf6-413a-a6a7-829acd939fc3">
+
 
 
 
