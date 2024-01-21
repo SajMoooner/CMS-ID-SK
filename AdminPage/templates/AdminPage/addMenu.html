@@ -164,14 +164,12 @@
 
             <form method="post">
                 {% csrf_token %}
-                <!-- Formulář pro výběr kategorie -->
                 <div class="govuk-form-group">
                     {{ category_form.category|add_class:"govuk-select" }}
                     <button type="submit" class="govuk-button">Zobraziť podkategórie</button>
                 </div>
             </form>
 
-            <!-- Záhlaví tabulky ve stylu GOV.UK -->
             <div class="govuk-grid-row" style="margin-bottom: 5px;">
                 <div class="govuk-grid-column-one-third" style="font-weight: bold;">Názov</div>
                 <div class="govuk-grid-column-one-third" style="font-weight: bold;">Odkaz</div>
@@ -204,7 +202,6 @@
             <form method="post">
                 {% csrf_token %}
                 <input type="hidden" name="category_id" value="{{ category_form.category.value }}">
-                <!-- Přidáno skryté pole -->
                 <div class="govuk-grid-row">
                     <div class="govuk-grid-column-one-third">
                         <input type="text" name="new_name" class="govuk-input" placeholder="Nový názov">

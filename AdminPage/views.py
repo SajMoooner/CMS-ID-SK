@@ -17,6 +17,7 @@ from DocumentPage.models import Document, Attachment, Company, DocumentType
 
 
 
+#--------Uvodna obrazovka admina----------------#
 @login_required
 def homeAdmin(request):
     user_groups = request.user.groups.values_list('name', flat=True)
@@ -28,6 +29,7 @@ def homeAdmin(request):
     }
     return render(request, 'AdminPage/homeAdmin.html', context)
 
+#--------CRUD kategorie----------------#
 @login_required
 def categoryAdmin(request):
     categories = Category.objects.all()
@@ -36,32 +38,8 @@ def categoryAdmin(request):
     }
     return render(request, 'AdminPage/categoryAdmin.html', context)
 
-#--------Pridanie clanku----------------#
-@login_required
-def articleAdmin(request):
-    if request.method == 'POST':
-        article_form = ArticleForm(request.POST, request.FILES)
-        subtitle_forms = [SubtitleForm(request.POST, request.FILES, prefix=str(x)) for x in range(5)]
 
-        if article_form.is_valid():
-            article = article_form.save()
-
-            for sf in subtitle_forms:
-                if sf.is_valid() and sf.cleaned_data.get('text'):  # Zde se kontroluje, zda je text podtitulku vyplněný
-                    subtitle = sf.save(commit=False)
-                    subtitle.article = article
-                    subtitle.save()
-
-            return redirect('homeAdmin')
-    else:
-        article_form = ArticleForm()
-        subtitle_forms = [SubtitleForm(prefix=str(x)) for x in range(5)]
-
-    return render(request, 'AdminPage/addArticle.html', {'article_form': article_form, 'subtitle_forms': subtitle_forms})
-
-
-
-#--------Pridanie kategorie----------------#
+#--------Vymazanie kategorie kategorie----------------#
 @login_required
 @require_POST
 def delete_category(request, category_id):
@@ -69,6 +47,7 @@ def delete_category(request, category_id):
     category.delete()
     return HttpResponseRedirect(reverse('categoryAdmin'))
 
+#--------Pridanie kategorie----------------#
 def categoryAdmin(request):
     if request.method == 'POST':
         new_category_name = request.POST.get('new_category_name').strip()  # Získajte nový názov kategórie a odstráňte biele znaky
@@ -89,6 +68,7 @@ def categoryAdmin(request):
     }
     return render(request, 'AdminPage/categoryAdmin.html', context)
 
+#--------Uprava kategorie----------------#
 @login_required
 @require_POST
 def update_category(request, category_id):
@@ -98,61 +78,99 @@ def update_category(request, category_id):
     if new_name:
         category.name = new_name
         category.save()
-        messages.success(request, 'Kategória bola úspešne upravená.')  # Optional: add a success message
+        messages.success(request, 'Kategória bola úspešne upravená.') 
     else:
-        messages.error(request, 'Názov kategórie nemôže byť prázdny.')  # Optional: add an error message
+        messages.error(request, 'Názov kategórie nemôže byť prázdny.')  
 
     return redirect('categoryAdmin')
+
+#--------Pridanie clanku----------------#
+@login_required
+def articleAdmin(request):
+    if request.method == 'POST':
+        article_form = ArticleForm(request.POST, request.FILES)
+        subtitle_forms = [SubtitleForm(request.POST, request.FILES, prefix=str(x)) for x in range(5)]
+
+        if article_form.is_valid():
+            article = article_form.save()
+
+            for sf in subtitle_forms:
+                if sf.is_valid() and sf.cleaned_data.get('text'):  # Tu sa kontroluje, či je text podtitulku vyplnený
+                    subtitle = sf.save(commit=False)
+                    subtitle.article = article
+                    subtitle.save()
+
+            return redirect('homeAdmin')
+    else:
+        article_form = ArticleForm()
+        subtitle_forms = [SubtitleForm(prefix=str(x)) for x in range(5)]
+
+    return render(request, 'AdminPage/addArticle.html', {'article_form': article_form, 'subtitle_forms': subtitle_forms})
+
 
 #---------Uprava clanku-----------------#
 @login_required
 def updateArticle(request):
+    # Inicializácia formulára pre filtrovanie článkov a deklarácia premenných
     form = ArticleFilterForm(request.POST or None)
     selected_article = None
     subtitles = []
     selected_category_id = None 
     selected_article_id = None  
 
+    # Kontrola, či bola požiadavka odoslaná metódou POST
     if request.method == 'POST':
+        # Získanie ID kategórie a článku z POST dát
         category_id = request.POST.get('category')
         article_id = request.POST.get('article')
         
+        # Kontrola, či je požiadavka na načítanie článkov podľa kategórie
         if 'load_articles' in request.POST and category_id:
             selected_category_id = category_id
+            # Aktualizácia querysetu pre pole článku vo formulári
             form.fields['article'].queryset = Article.objects.filter(category_id=category_id)
 
+        # Kontrola, či je požiadavka na výber konkrétneho článku
         elif 'select_article' in request.POST and article_id:
             selected_article_id = article_id
+            # Získanie vybraného článku alebo vyvolanie 404, ak neexistuje
             selected_article = get_object_or_404(Article, id=article_id)
+            # Získanie podtitulov článku
             subtitles = selected_article.subtitles.all()
             if category_id:
                 selected_category_id = category_id
+                # Aktualizácia querysetu pre pole článku vo formulári
                 form.fields['article'].queryset = Article.objects.filter(category_id=category_id)
 
+        # Kontrola, či je požiadavka na aktualizáciu článku
         elif 'update_article' in request.POST:
             article_id = request.POST.get('article_id')
             if article_id:
+                # Získanie a aktualizácia článku
                 selected_article = get_object_or_404(Article, id=article_id)
                 selected_article.title = request.POST.get('title', selected_article.title)
                 selected_article.content = request.POST.get('content', selected_article.content)
                 
+                # Kontrola a uloženie nového obrázka, ak bol priložený
                 if 'image' in request.FILES:
                     image = request.FILES['image']
                     selected_article.image.save(image.name, image, save=True)
                 selected_article.save()
                 
-                # Aktualizace titulků podčlánků
+                # Aktualizácia podtitulov
                 for subtitle in selected_article.subtitles.all():
                     subtitle.title = request.POST.get(f'subtitle_title_{subtitle.id}', subtitle.title)
                     subtitle.text = request.POST.get(f'subtitle_text_{subtitle.id}', subtitle.text)
+                    # Kontrola a uloženie nového obrázka pre podtitul, ak bol priložený
                     if f'subtitle_image_{subtitle.id}' in request.FILES:
                         image = request.FILES[f'subtitle_image_{subtitle.id}']
                         subtitle.image.save(image.name, image, save=True)
                     subtitle.save()
                 
-                # Přesměrování po úspěšné aktualizaci
+                # Presmerovanie na úvodnú stránku po úspešnej aktualizácii
                 return redirect('/uvod')
             
+    # Renderovanie šablóny s kontextom
     return render(request, 'AdminPage/updateArticle.html', {
                 'form': form,
                 'selected_article': selected_article,
@@ -164,12 +182,13 @@ def updateArticle(request):
 #--------Odstranenie clanku----------------#
 @login_required
 def deleteArticle(request):
-    # Filtrování článků
+    # Získanie článkov z databázy podľa filtrov
     articles_query = Article.objects.all()
     category_id = request.GET.get('category')
     target_audience_id = request.GET.get('target_audience')
     department_id = request.GET.get('department')
 
+    # Filtrovanie podľa kategórie, cieľového publika a oddelenia
     if category_id:
         articles_query = articles_query.filter(category_id=category_id)
     if target_audience_id:
@@ -177,7 +196,7 @@ def deleteArticle(request):
     if department_id:
         articles_query = articles_query.filter(department_id=department_id)
 
-    # Odstranění článku
+    # Odstránenie článku
     if request.method == 'POST':
         article_id = request.POST.get('article_id')
         if article_id:
@@ -226,40 +245,48 @@ def allArticles(request):
     }
     return render(request, 'AdminPage/allArticles.html', context)
 
-#--------Menu----------------#
-
+#--------Pridanie menu----------------#
 @login_required
 def addMenu(request):
+    # Initializácia formulára pre výber kategórie
     selected_category_id = None
     category_form = CategorySelectForm(request.POST or None)
 
+    # Kontrola, či bola požiadavka odoslaná metódou POST
     if request.method == 'POST':
-        if 'new_name' in request.POST:  # Přidání nové podkategorie
+        # Kontrola, či sa pridáva nová položka menu
+        if 'new_name' in request.POST:  
             new_name = request.POST.get('new_name', '')
             new_link = request.POST.get('new_link', '')
             selected_category_id = request.POST.get('category_id', '')
 
+            # Kontrola, či boli zadané všetky potrebné údaje pre novú položku menu
             if new_name and selected_category_id:
+                # Získanie vybranej kategórie podľa ID
                 selected_category = Category.objects.get(id=selected_category_id)
+                # Vytvorenie novej podkategórie v danej kategórii
                 Subcategory.objects.create(category=selected_category, name=new_name, link=new_link)
-                
 
+        # Kontrola, či bol odoslaný a správne vyplnený formulár pre výběr kategorie
         elif category_form.is_valid():
             selected_category = category_form.cleaned_data['category']
             selected_category_id = str(selected_category.id) if selected_category else None
 
-        # Uložení vybrané kategorie do session
+        # Uloženie vybranej kategórie do session pre neskoršie použitie
         request.session['selected_category_id'] = selected_category_id
 
     else:  # GET request
-        # Obnovení vybrané kategorie ze session
+       
         selected_category_id = request.session.get('selected_category_id')
 
+    # Kontrola, či je vybraná nejaká kategória
     if selected_category_id:
-        # Vytvoření formuláře s výchozí hodnotou
+        # Vytvorenie formulára s prednastavenou hodnotou vybranej kategórie
         category_form = CategorySelectForm(initial={'category': selected_category_id})
+        # Získanie všetkých podkategórií pre vybranú kategóriu
         subcategories = Subcategory.objects.filter(category_id=selected_category_id)
     else:
+        # Ak nie je vybraná žiadna kategória, zoznam podkategórií je prázdny
         subcategories = []
 
     return render(request, 'AdminPage/addMenu.html', {
@@ -267,13 +294,14 @@ def addMenu(request):
         'subcategories': subcategories,
     })
 
-
+#--------Odstranenie menu----------------#
 @login_required
 def delete_subcategory(request, subcategory_id):
     subcategory = get_object_or_404(Subcategory, id=subcategory_id)
     subcategory.delete()
     return redirect('/uvod/menu')  # Redirekt zpět na seznam podkategorií
 
+#--------Uprava menu----------------#
 @login_required
 def edit_subcategory(request, subcategory_id):
     subcategory = get_object_or_404(Subcategory, id=subcategory_id)
@@ -282,13 +310,12 @@ def edit_subcategory(request, subcategory_id):
         subcategory.name = request.POST.get('name', '')
         subcategory.link = request.POST.get('link', '')
         subcategory.save()
-        return redirect('/uvod/menu')  # nebo jiná URL pro návrat
+        return redirect('/uvod/menu')  
 
-    # Pokud je GET požadavek, zobrazte stránku pro úpravu (nebo můžete přesměrovat jinam)
     return render(request, '/uvod/menu', {'subcategory': subcategory})
 
-#--------Pridanie dokumentu----------------#
 
+#--------Pridanie dokumentu----------------#
 @login_required
 def addDocument(request):
     if request.method == 'POST':
