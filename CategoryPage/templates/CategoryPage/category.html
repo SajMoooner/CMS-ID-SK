@@ -541,73 +541,166 @@
             }
 
 
+           
             // Načítanie cieľových skupín
             $.getJSON('http://localhost:8000/kategoria/api/get-target-audiences/', function (data) {
-                var items = [];
+                var $targetAudiencesContainer = $('#targetAudiencesContainer');
+                $targetAudiencesContainer.empty();
+            
                 $.each(data.target_audiences, function (key, val) {
-                    items.push("<div class='govuk-checkboxes__item'><input class='govuk-checkboxes__input target-audience-checkbox' id='audience-" + val.id + "' type='checkbox' data-target-audience-id='" + val.id + "'><label class='govuk-label govuk-checkboxes__label' for='audience-" + val.id + "'>" + val.name + "</label></div>");
+                    var $item = $("<div>", {class: 'govuk-checkboxes__item'});
+                    var $input = $("<input>", {
+                        class: 'govuk-checkboxes__input target-audience-checkbox',
+                        id: 'audience-' + val.id,
+                        type: 'checkbox',
+                        'data-target-audience-id': val.id
+                    });
+                    var $label = $("<label>", {
+                        class: 'govuk-label govuk-checkboxes__label',
+                        for: 'audience-' + val.id
+                    }).text(val.name);
+            
+                    $item.append($input).append($label);
+                    $targetAudiencesContainer.append($item);
                 });
-                $('#targetAudiencesContainer').html(items.join(""));
+            
                 setInitialFiltersFromUrl();
-
             });
+            
             // Načítanie oddelení
             $.getJSON('http://localhost:8000/kategoria/api/get-departments/', function (data) {
-                var items = [];
+                var $departmentsContainer = $('#departmentsContainer');
+                $departmentsContainer.empty();
+            
                 $.each(data.departments, function (key, val) {
-                    items.push("<div class='govuk-checkboxes__item'><input class='govuk-checkboxes__input department-checkbox' id='department-" + val.id + "' type='checkbox' data-department-id='" + val.id + "'><label class='govuk-label govuk-checkboxes__label' for='department-" + val.id + "'>" + val.name + "</label></div>");
-
+                    var $item = $("<div>", {class: 'govuk-checkboxes__item'});
+                    var $input = $("<input>", {
+                        class: 'govuk-checkboxes__input department-checkbox',
+                        id: 'department-' + val.id,
+                        type: 'checkbox',
+                        'data-department-id': val.id
+                    });
+                    var $label = $("<label>", {
+                        class: 'govuk-label govuk-checkboxes__label',
+                        for: 'department-' + val.id
+                    }).text(val.name);
+            
+                    $item.append($input).append($label);
+                    $departmentsContainer.append($item);
                 });
-                $('#departmentsContainer').html(items.join(""));
+            
                 setInitialFiltersFromUrl();
             });
+            
 
             // Načítanie kategórií s pridaným 'data-category-id'
             $.getJSON('http://localhost:8000/kategoria/api/get-category', function (data) {
-                var items = [];
+                var $categoriesContainer = $('#categoriesContainer');
+                $categoriesContainer.empty();
+            
                 $.each(data.categories, function (key, val) {
-                    items.push("<div class='govuk-checkboxes__item'><input class='govuk-checkboxes__input category-checkbox' id='category-"
-                        + val.id + "' type='checkbox' data-category-id='" + val.id +
-                        "'><label class='govuk-label govuk-checkboxes__label' for='category-" + val.id + "'>" + val.name + "</label></div>");
+                    var $item = $("<div>", {class: 'govuk-checkboxes__item'});
+                    var $input = $("<input>", {
+                        class: 'govuk-checkboxes__input category-checkbox',
+                        id: 'category-' + val.id,
+                        type: 'checkbox',
+                        'data-category-id': val.id
+                    });
+                    var $label = $("<label>", {
+                        class: 'govuk-label govuk-checkboxes__label',
+                        for: 'category-' + val.id
+                    }).text(val.name);
+            
+                    $item.append($input).append($label);
+                    $categoriesContainer.append($item);
                 });
-                $('#categoriesContainer').html(items.join(""));
+            
                 setInitialFiltersFromUrl();
             });
+            
 
             // Načítanie životných situácií
             $.getJSON('http://localhost:8000/kategoria/api/get-life-situations/', function (data) {
-                var items = [];
+                var $lifeSituationsContainer = $('#lifeSituationsContainer');
+                $lifeSituationsContainer.empty();
+            
                 $.each(data.life_situations, function (key, val) {
-                    items.push("<div class='govuk-checkboxes__item'><input class='govuk-checkboxes__input life-situation-checkbox' id='life-situation-" + val.id + "' type='checkbox' data-life-situation-id='" + val.id + "'><label class='govuk-label govuk-checkboxes__label' for='life-situation-" + val.id + "'>" + val.name + "</label></div>");
+                    var $item = $("<div>", {class: 'govuk-checkboxes__item'});
+                    var $input = $("<input>", {
+                        class: 'govuk-checkboxes__input life-situation-checkbox',
+                        id: 'life-situation-' + val.id,
+                        type: 'checkbox',
+                        'data-life-situation-id': val.id
+                    });
+                    var $label = $("<label>", {
+                        class: 'govuk-label govuk-checkboxes__label',
+                        for: 'life-situation-' + val.id
+                    }).text(val.name);
+            
+                    $item.append($input).append($label);
+                    $lifeSituationsContainer.append($item);
                 });
-                $('#lifeSituationsContainer').html(items.join(""));
+            
                 setInitialFiltersFromUrl();
             });
+            
 
 
             // Načítanie článkov
             $.getJSON('http://localhost:8000/kategoria/api/get-articles/', function (data) {
-                var articlesHtml = '';
+                var $articlesContainer = $('#articlesContainer');
+                $articlesContainer.empty(); // Vyčistiť predchádzajúci obsah
+
                 $.each(data.articles, function (key, article) {
-                    articlesHtml += "<div class='idsk-card' data-category='" + article.category_id + "' data-target-audience='" + article.target_audience_id + "' data-department='" + article.department_id + "' data-life-situation='" + article.life_situation_id + "'>" +
-                        "<div class='idsk-card-content idsk-card-content-basic-variant'>" +
-                        "<div class='idsk-heading idsk-heading-basic-variant'>" +
-                        "<a href='/clanok/" + article.id + "' class='idsk-card-title govuk-link' title='" + article.title + "'>" + article.title + "</a>" +
-                        "</div>" +
-                        "<p class='idsk-body idsk-body-basic-variant'>" + article.content.split(" ").slice(0, 20).join(" ") + "...</p>" +
-                        "<div class='idsk-card-meta-container'>" +
-                        "<span class='idsk-card-meta idsk-card-meta-date'>" +
-                        "<a href='/clanok/" + article.id + "' class='govuk-link' title='Pridané dňa: " + new Date(article.created_at).toLocaleDateString("sk-SK") + "'>" +
-                        new Date(article.created_at).toLocaleDateString("sk-SK") + "</a>" +
-                        "</span>" +
-                        "</div>" +
-                        "</div>" +
-                        "</div>";
+                    // Vytvorenie hlavného kontajneru pre článok
+                    var $articleDiv = $("<div>", {
+                        class: 'idsk-card',
+                        'data-category': article.category_id,
+                        'data-target-audience': article.target_audience_id,
+                        'data-department': article.department_id,
+                        'data-life-situation': article.life_situation_id
+                    });
+
+                    // Vytvorenie kontajneru pre obsah článku
+                    var $contentDiv = $("<div>", {class: 'idsk-card-content idsk-card-content-basic-variant'});
+
+                    // Vytvorenie a pridanie nadpisu
+                    var $titleLink = $("<a>", {
+                        class: 'idsk-card-title govuk-link',
+                        href: '/clanok/' + article.id,
+                        title: $('<div>').text(article.title).html() // Escapovanie a potom prevod na HTML
+                    }).text(article.title);
+                    var $titleDiv = $("<div>", {class: 'idsk-heading idsk-heading-basic-variant'}).append($titleLink);
+                    $contentDiv.append($titleDiv);
+
+                    // Vytvorenie a pridanie skráteného obsahu článku
+                    var shortContent = article.content.split(" ").slice(0, 20).join(" ") + "...";
+                    var $contentP = $("<p>", {class: 'idsk-body idsk-body-basic-variant'}).text(shortContent);
+                    $contentDiv.append($contentP);
+
+                    // Vytvorenie a pridanie metadát
+                    var formattedDate = new Date(article.created_at).toLocaleDateString("sk-SK");
+                    var $dateLink = $("<a>", {
+                        class: 'govuk-link',
+                        href: '/clanok/' + article.id,
+                        title: 'Pridané dňa: ' + formattedDate
+                    }).text(formattedDate);
+                    var $dateSpan = $("<span>", {class: 'idsk-card-meta idsk-card-meta-date'}).append($dateLink);
+                    var $metaDiv = $("<div>", {class: 'idsk-card-meta-container'}).append($dateSpan);
+                    $contentDiv.append($metaDiv);
+
+                    // Pridanie celého článku do hlavného kontajneru
+                    $articleDiv.append($contentDiv);
+
+                    // Pridanie článku do kontajneru článkov na stránke
+                    $articlesContainer.append($articleDiv);
                 });
-                $('#articlesContainer').html(articlesHtml);
+
+                // Zavolanie ďalších funkcií, ak je to potrebné
                 setInitialFiltersFromUrl();
                 updateResultsCount();
             });
+
 
 
             // Funkcia na aktualizáciu filtrov
