@@ -8,4 +8,4 @@ services:
       - .:/app
       - ./media:/var/www/mestoSlovakoSoft/media
     ports:
-      - "8000:8000"
+      - "8020:80"
