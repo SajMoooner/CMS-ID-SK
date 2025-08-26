@@ -543,7 +543,7 @@
 
            
             // Načítanie cieľových skupín
-            $.getJSON('http://localhost:8000/kategoria/api/get-target-audiences/', function (data) {
+            $.getJSON('https://www.egovplatforma.sk/kategoria/api/get-target-audiences/', function (data) {
                 var $targetAudiencesContainer = $('#targetAudiencesContainer');
                 $targetAudiencesContainer.empty();
             
@@ -568,7 +568,7 @@
             });
             
             // Načítanie oddelení
-            $.getJSON('http://localhost:8000/kategoria/api/get-departments/', function (data) {
+            $.getJSON('https://www.egovplatforma.sk/kategoria/api/get-departments/', function (data) {
                 var $departmentsContainer = $('#departmentsContainer');
                 $departmentsContainer.empty();
             
@@ -594,7 +594,7 @@
             
 
             // Načítanie kategórií s pridaným 'data-category-id'
-            $.getJSON('http://localhost:8000/kategoria/api/get-category', function (data) {
+            $.getJSON('https://www.egovplatforma.sk/kategoria/api/get-category', function (data) {
                 var $categoriesContainer = $('#categoriesContainer');
                 $categoriesContainer.empty();
             
@@ -620,7 +620,7 @@
             
 
             // Načítanie životných situácií
-            $.getJSON('http://localhost:8000/kategoria/api/get-life-situations/', function (data) {
+            $.getJSON('https://www.egovplatforma.sk/kategoria/api/get-life-situations/', function (data) {
                 var $lifeSituationsContainer = $('#lifeSituationsContainer');
                 $lifeSituationsContainer.empty();
             
@@ -647,7 +647,7 @@
 
 
             // Načítanie článkov
-            $.getJSON('http://localhost:8000/kategoria/api/get-articles/', function (data) {
+            $.getJSON('https://www.egovplatforma.sk/kategoria/api/get-articles/', function (data) {
                 var $articlesContainer = $('#articlesContainer');
                 $articlesContainer.empty(); // Vyčistiť predchádzajúci obsah
 

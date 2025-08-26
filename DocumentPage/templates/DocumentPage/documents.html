@@ -404,7 +404,7 @@
     });
     
     function fetchCompanies() {
-        return fetch('http://localhost:8000/dokumenty/api/get_companies/')
+        return fetch('https://www.egovplatforma.sk/dokumenty/api/get_companies/')
             .then(response => response.json())
             .then(companies => {
                 const companyMap = {};
@@ -417,7 +417,7 @@
     
     function fetchAndDisplayDocuments(documentTypeId = null) {
         fetchCompanies().then(companyMap => {
-            let url = 'http://localhost:8000/dokumenty/api/get_documents/';
+            let url = 'https://www.egovplatforma.sk/dokumenty/api/get_documents/';
             if (documentTypeId) {
                 url += `?document_type_id=${documentTypeId}`;
             }
